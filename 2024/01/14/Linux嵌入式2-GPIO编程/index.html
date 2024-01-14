@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Linux嵌入式2-GPIO编程 - 我超爱大海的</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="头文件说明1234&amp;lt;sys/types.h&amp;gt;：该头文件定义了一些基本的系统数据类型，如size_t、time_t等。&amp;lt;sys/stat.h&amp;gt;：该头文件定义了一些关于文件状态的,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="我超爱大海的" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="Linux嵌入式2-GPIO编程 - 我超爱大海的"/>
+    <meta name="twitter:description" content="头文件说明1234&amp;lt;sys/types.h&amp;gt;：该头文件定义了一些基本的系统数据类型，如size_t、time_t等。&amp;lt;sys/stat.h&amp;gt;：该头文件定义了一些关于文件状态的,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="我超爱大海的"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="Linux嵌入式2-GPIO编程 - 我超爱大海的"/>
+    <meta property="og:description" content="头文件说明1234&amp;lt;sys/types.h&amp;gt;：该头文件定义了一些基本的系统数据类型，如size_t、time_t等。&amp;lt;sys/stat.h&amp;gt;：该头文件定义了一些关于文件状态的,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script>window.searchDbPath = "/search.xml";</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">我超爱大海的</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Linux嵌入式2-GPIO编程</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Linux嵌入式2-GPIO编程</h1>
+        <div class="stuff">
+            <span>一月 14, 2024</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h3 id="头文件说明"><a href="#头文件说明" class="headerlink" title="头文件说明"></a>头文件说明</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;sys/types.h&gt;：该头文件定义了一些基本的系统数据类型，如<span class="type">size_t</span>、<span class="type">time_t</span>等。</span><br><span class="line">&lt;sys/stat.h&gt;：该头文件定义了一些关于文件状态的函数和宏，如stat()、S_IRUSR等。</span><br><span class="line">&lt;fcntl.h&gt;：该头文件定义了一些文件控制操作的函数和常量，如open()、O_RDONLY等。</span><br><span class="line">&lt;unistd.h&gt;：该头文件定义了一些系统调用函数，如read()、write()等。</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="函数说明"><a href="#函数说明" class="headerlink" title="函数说明"></a>函数说明</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">access</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *pathname, <span class="type">int</span> mode)</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">mode 是要检查的权限模式。常用的权限模式有以下几种：</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">F_OK：用于检查文件或目录是否存在。</span></span><br><span class="line"><span class="comment">R_OK：用于检查文件或目录是否可读。</span></span><br><span class="line"><span class="comment">W_OK：用于检查文件或目录是否可写。</span></span><br><span class="line"><span class="comment">X_OK：用于检查文件或目录是否可执行。</span></span><br><span class="line"><span class="comment">存在返回0，不存在返回-1</span></span><br><span class="line"><span class="comment">*/</span>   </span><br><span class="line">    </span><br><span class="line">len = <span class="built_in">strlen</span>(argv[<span class="number">1</span>]);</span><br><span class="line">        <span class="keyword">if</span>(len != write(fd,argv[<span class="number">1</span>],len))&#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">write函数向文件写入数据，写入argv[1]字符串，后面接写入的字节数，成功返回写入的字节数</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="一、GPIO应用编程"><a href="#一、GPIO应用编程" class="headerlink" title="一、GPIO应用编程"></a>一、GPIO应用编程</h2><h3 id="1、基础属性："><a href="#1、基础属性：" class="headerlink" title="1、基础属性："></a>1、基础属性：</h3><p>gpio设备目录在&#x2F;sys&#x2F;class&#x2F;gpio中：</p>
+<p><img src="http://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20231015142048558.png" alt="image-20231015142048558"></p>
+<p>gpiochip0<del>128分别对应i.max6ull的五组gpio1</del>5，export用来导出指定编号的gpio，加入需要导出GPIO4_IO20，首先需要确定GPIO的编号，GPIO4对应gpiochip96，编号为94+20&#x3D;114</p>
+<p>执行导出命令为echo 94 &gt; export</p>
+<p>以导出GPIO0_IO1为例：执行echo 1 &gt; export，会生成一个gpio1的文件夹，里面描述了gpio1的相关信息：</p>
+<p><img src="http://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20231015142724436.png" alt="image-20231015142724436"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dirction: IO的方向可以设置为out 和 in</span><br><span class="line">active_low: 电平逻辑状态，默认为<span class="number">0</span>，此时<span class="number">1</span>为高电平 <span class="number">0</span>为低电平</span><br><span class="line">value： 电平状态</span><br><span class="line">edge: 中断触发：none rising falling both分别表示无触发、上升沿、下降沿、边沿触发</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、gpio-config函数"><a href="#2、gpio-config函数" class="headerlink" title="2、gpio_config函数"></a>2、gpio_config函数</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	path：gpioX路径	/sys/class/gpio/gpio1</span></span><br><span class="line"><span class="comment">	attr：需要修改的属性 direction</span></span><br><span class="line"><span class="comment">	value：修改的具体值	out</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">gpio_config</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *path, <span class="type">const</span> <span class="type">char</span> *attr, <span class="type">const</span> <span class="type">char</span> *val)</span>&#123;</span><br><span class="line">    <span class="type">int</span> fd;</span><br><span class="line">    <span class="type">int</span> len;</span><br><span class="line">    <span class="type">char</span> file_path[<span class="number">100</span>];</span><br><span class="line">    <span class="comment">// 拼接字符串</span></span><br><span class="line">    <span class="built_in">sprintf</span>(file_path,<span class="string">&quot;%s/%s&quot;</span>, path, attr);</span><br><span class="line">    <span class="comment">// 打开文件</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="number">0</span> &gt; (fd = open(file_path, O_WRONLY)))</span><br><span class="line">    &#123;</span><br><span class="line">        perror(<span class="string">&quot;open gpio error&quot;</span>);</span><br><span class="line">        close(fd);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 向文件写入指定长度的数据</span></span><br><span class="line">    len = <span class="built_in">strlen</span>(val);</span><br><span class="line">    <span class="keyword">if</span> (len != write(fd, val, len))</span><br><span class="line">    &#123;</span><br><span class="line">        perror(<span class="string">&quot;write info error&quot;</span>);</span><br><span class="line">        close(fd);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    close(fd);</span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">&quot;write success!\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// main函数：</span></span><br><span class="line"><span class="comment">// 判断输入的gpioX是否存在，不存在需要通过写export文件导出IO</span></span><br><span class="line"><span class="built_in">sprintf</span>(gpio_path,<span class="string">&quot;/sys/class/gpio/gpio%s&quot;</span>,argv[<span class="number">1</span>]);</span><br><span class="line"><span class="keyword">if</span> (access(gpio_path,F_OK))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> fd;</span><br><span class="line">    <span class="type">int</span> len;</span><br><span class="line">    <span class="keyword">if</span> (<span class="number">0</span> &gt; (fd = open(<span class="string">&quot;/sys/class/gpio/export&quot;</span>,O_WRONLY)))</span><br><span class="line">    &#123;</span><br><span class="line">        perror(<span class="string">&quot;open export error&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    len = <span class="built_in">strlen</span>(argv[<span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">if</span>(len != write(fd,argv[<span class="number">1</span>],len))&#123;</span><br><span class="line">        perror(<span class="string">&quot;write error&quot;</span>);</span><br><span class="line">        close(fd);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    close(fd);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(gpio_config(gpio_path,<span class="string">&quot;direction&quot;</span>, <span class="string">&quot;in&quot;</span>))&#123;</span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">&quot;write direction error\n&quot;</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(gpio_config(gpio_path,<span class="string">&quot;active_low&quot;</span>, <span class="string">&quot;0&quot;</span>))&#123;</span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">&quot;write active_low error\n&quot;</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(gpio_config(gpio_path,<span class="string">&quot;value&quot;</span>, argv[<span class="number">2</span>]))&#123;</span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">&quot;write value error\n&quot;</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、poll-函数"><a href="#3、poll-函数" class="headerlink" title="3、poll()函数"></a>3、poll()函数</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用poll()函数实现非阻塞式中断触发</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span>&#123;</span><br><span class="line">    <span class="type">char</span> gpio_path[<span class="number">100</span>];</span><br><span class="line">    <span class="type">char</span> file_path[<span class="number">100</span>];</span><br><span class="line">    <span class="comment">// 创建pollfd结构体，描述文件就绪状态</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">pollfd</span> <span class="title">pfd</span>;</span></span><br><span class="line">    <span class="type">char</span> val;</span><br><span class="line">    <span class="type">int</span> ret;</span><br><span class="line">    <span class="keyword">if</span> (<span class="number">2</span> != argc)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">&quot;usage:%s &lt;gpio&gt; &lt;value&gt;\n&quot;</span>, argv[<span class="number">0</span>]);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">sprintf</span>(gpio_path,<span class="string">&quot;/sys/class/gpio/gpio%s&quot;</span>,argv[<span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">if</span> (access(gpio_path,F_OK))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> fd;</span><br><span class="line">        <span class="type">int</span> len;</span><br><span class="line">        <span class="keyword">if</span> (<span class="number">0</span> &gt; (fd = open(<span class="string">&quot;/sys/class/gpio/export&quot;</span>,O_WRONLY)))</span><br><span class="line">        &#123;</span><br><span class="line">            perror(<span class="string">&quot;open export error&quot;</span>);</span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        len = <span class="built_in">strlen</span>(argv[<span class="number">1</span>]);</span><br><span class="line">        <span class="keyword">if</span>(len != write(fd,argv[<span class="number">1</span>],len))&#123;</span><br><span class="line">            perror(<span class="string">&quot;write error&quot;</span>);</span><br><span class="line">            close(fd);</span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        close(fd);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(gpio_config(gpio_path,<span class="string">&quot;direction&quot;</span>, <span class="string">&quot;in&quot;</span>))&#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">&quot;write direction error\n&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(gpio_config(gpio_path,<span class="string">&quot;active_low&quot;</span>, <span class="string">&quot;0&quot;</span>))&#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">&quot;write active_low error\n&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 配置为边沿触发</span></span><br><span class="line">    <span class="keyword">if</span>(gpio_config(gpio_path,<span class="string">&quot;edge&quot;</span>, <span class="string">&quot;both&quot;</span>))&#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">&quot;write edge error\n&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 打开IO状态value文件，文件描述符保存在pfd.fd</span></span><br><span class="line">    <span class="built_in">sprintf</span>(file_path,<span class="string">&quot;%s/%s&quot;</span>, gpio_path, <span class="string">&quot;value&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (<span class="number">0</span> &gt; (pfd.fd = open(file_path,O_RDONLY)))</span><br><span class="line">    &#123;</span><br><span class="line">        perror(<span class="string">&quot;open pfd.fd error&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    pfd.events = POLLPRI;<span class="comment">// 只关心高优先级数据可读 中断 只有高优先级才会触发文件转换为就绪态</span></span><br><span class="line">    read(pfd.fd, &amp;val, <span class="number">1</span>);<span class="comment">// 读取一次清除状态</span></span><br><span class="line">    <span class="comment">//轮询读取</span></span><br><span class="line">    <span class="keyword">for</span> (;;)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 监听pfd文件状态，内部有一个文件描述符 超时时间-1</span></span><br><span class="line">        ret = poll(&amp;pfd, <span class="number">1</span>, <span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">if</span> (<span class="number">0</span> &gt; ret) &#123;</span><br><span class="line">            perror(<span class="string">&quot;poll error&quot;</span>);</span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(<span class="number">0</span> == ret)&#123;</span><br><span class="line">            <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">&quot;poll time out&quot;</span>);</span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">		<span class="comment">// 事件触发</span></span><br><span class="line">        <span class="keyword">if</span> (pfd.events &amp; POLLPRI)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 因为之前读取过文件，需要移动指针到0</span></span><br><span class="line">            <span class="keyword">if</span>(<span class="number">0</span> &gt; lseek(pfd.fd, <span class="number">0</span>, SEEK_SET))&#123;</span><br><span class="line">                perror(<span class="string">&quot;lseek error&quot;</span>);</span><br><span class="line">                <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">			<span class="comment">// 读取文件</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="number">0</span> &gt; read(pfd.fd, &amp;val, <span class="number">1</span>))</span><br><span class="line">            &#123;</span><br><span class="line">                perror(<span class="string">&quot;read pfd.fd error&quot;</span>);</span><br><span class="line">                <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;get interupt &lt;value=%c&gt;\n&quot;</span>, val);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
