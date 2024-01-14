@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Linux嵌入式3-输入设备 - 我超爱大海的</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="输入类设备描述设备文件路径：&amp;#x2F;dev&amp;#x2F;input&amp;#x2F;event
+查看设备事件命令：cat &amp;#x2F;proc&amp;#x2F;bus&amp;#x2F;input&amp;#x2F;devi,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="我超爱大海的" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="Linux嵌入式3-输入设备 - 我超爱大海的"/>
+    <meta name="twitter:description" content="输入类设备描述设备文件路径：&amp;#x2F;dev&amp;#x2F;input&amp;#x2F;event
+查看设备事件命令：cat &amp;#x2F;proc&amp;#x2F;bus&amp;#x2F;input&amp;#x2F;devi,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="我超爱大海的"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="Linux嵌入式3-输入设备 - 我超爱大海的"/>
+    <meta property="og:description" content="输入类设备描述设备文件路径：&amp;#x2F;dev&amp;#x2F;input&amp;#x2F;event
+查看设备事件命令：cat &amp;#x2F;proc&amp;#x2F;bus&amp;#x2F;input&amp;#x2F;devi,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script>window.searchDbPath = "/search.xml";</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<script type="text/javascript" src="\js\snow.js"></script>
+<body class="loading">
+    <span id="config-title" style="display:none">我超爱大海的</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Linux嵌入式3-输入设备</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Linux嵌入式3-输入设备</h1>
+        <div class="stuff">
+            <span>一月 14, 2024</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h1 id="输入类设备描述"><a href="#输入类设备描述" class="headerlink" title="输入类设备描述"></a>输入类设备描述</h1><p>设备文件路径：&#x2F;dev&#x2F;input&#x2F;event</p>
+<p>查看设备事件命令：cat &#x2F;proc&#x2F;bus&#x2F;input&#x2F;devices</p>
+<p><img src="http://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240114204650594.png" alt="image-20240114204650594"></p>
+<h1 id="linux内核描述"><a href="#linux内核描述" class="headerlink" title="linux内核描述"></a>linux内核描述</h1><h3 id="输入设备描述事件"><a href="#输入设备描述事件" class="headerlink" title="输入设备描述事件"></a>输入设备描述事件</h3><p>查看事件描述符在”<strong>input-event-codes.h</strong>“文件中，已经在linux&#x2F;input.h中包含</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">input_event</span> &#123;</span></span><br><span class="line"><span class="meta">#<span class="keyword">if</span> (__BITS_PER_LONG != 32 || !defined(__USE_TIME_BITS64)) &amp;&amp; !defined(__KERNEL__)</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">timeval</span> <span class="title">time</span>;</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> input_event_sec time.tv_sec</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> input_event_usec time.tv_usec</span></span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">	<span class="type">__kernel_ulong_t</span> __sec;</span><br><span class="line"><span class="meta">#<span class="keyword">if</span> defined(__sparc__) &amp;&amp; defined(__arch64__)</span></span><br><span class="line">	<span class="type">unsigned</span> <span class="type">int</span> __usec;</span><br><span class="line">	<span class="type">unsigned</span> <span class="type">int</span> __pad;</span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">	<span class="type">__kernel_ulong_t</span> __usec;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> input_event_sec  __sec</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> input_event_usec __usec</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">	__u16 type;</span><br><span class="line">	__u16 code;</span><br><span class="line">	__s32 value;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> timeval 为事件上报时间</span></span><br><span class="line"><span class="comment"> type 为事件类型</span></span><br><span class="line"><span class="comment"> code 为具体事件</span></span><br><span class="line"><span class="comment"> value 为事件的值</span></span><br><span class="line"><span class="comment"> 例如键盘按键KEY0按下时，type表示触发按键，code表示KEY0，value表示按下还是松开</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>数据同步：</strong></p>
+<p>同步事件<em><strong>EV_SYN</strong></em>用于实现同步操作、告知接收者本轮上报的数据已经完整，例如触摸屏幕一次操作需要上报x轴坐标，y轴坐标、触摸点信息等，此时就需要同步事件。同步事件的type类型如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> SYN_REPORT 0</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SYN_CONFIG 1</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SYN_MT_REPORT 2</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SYN_DROPPED 3</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SYN_MAX 0xf</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SYN_CNT (SYN_MAX+1)</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>所有的事件上报完成后都需要再上报一个同步事件，一般是SYN_REPORT，value为0。</strong></p>
+<h1 id="读取开发板上报事件"><a href="#读取开发板上报事件" class="headerlink" title="读取开发板上报事件"></a>读取开发板上报事件</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;poll.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/input.h&gt;</span></span></span><br><span class="line"><span class="comment">// /dev/input/event2</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span>&#123;</span><br><span class="line">    <span class="type">char</span> gpio_path[<span class="number">100</span>];</span><br><span class="line">    <span class="type">char</span> file_path[<span class="number">100</span>];</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">input_event</span> <span class="title">in_ev</span> =</span> &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">pollfd</span> <span class="title">pfd</span>;</span></span><br><span class="line">    <span class="type">char</span> val;</span><br><span class="line">    <span class="type">int</span> fd;</span><br><span class="line">    <span class="comment">//效验传参   ./exe /dev/input/event2</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="number">2</span> != argc)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">&quot;usage:%s &lt;gpio&gt; &lt;value&gt;\n&quot;</span>, argv[<span class="number">0</span>]);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//打开事件</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="number">0</span> &gt; (fd = open(argv[<span class="number">1</span>],O_RDONLY)))</span><br><span class="line">    &#123;</span><br><span class="line">        perror(<span class="string">&quot;open export error&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//循环阻塞时读取上报事件</span></span><br><span class="line">    <span class="keyword">for</span> (;;)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">/* code */</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">sizeof</span>(<span class="keyword">struct</span> input_event) != read(fd, &amp;in_ev, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> input_event)))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">/* code */</span></span><br><span class="line">            perror(<span class="string">&quot;read error!&quot;</span>);</span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;type: %d code: %d value: %d\n&quot;</span>,in_ev.type, in_ev.code, in_ev.value);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="触摸屏上报事件分析"><a href="#触摸屏上报事件分析" class="headerlink" title="触摸屏上报事件分析"></a>触摸屏上报事件分析</h1><p><img src="http://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240114212415740.png" alt="image-20240114212415740"></p>
+<p>按下触摸屏后触发绝对位移事件EV_ABS（type&#x3D;3）中的ABS_MT_TRACKING_ID（code&#x3D;57）事件，value为78，表示有一个新的触点被创建，value为-1时表示触点松开，触点的ID为78，53和54分别表示x坐标和y坐标。</p>
+<p>获取触摸屏信息  需要使用一个开放函数：ioctl（input&#x2F;output control）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">ioctl</span><span class="params">(<span class="type">int</span> fd, <span class="type">unsigned</span> <span class="type">long</span> request, ...)</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> fd 是文件描述符，表示要控制的设备。</span></span><br><span class="line"><span class="comment"> request 是控制命令，通常是一个宏，定义了要执行的特定操作。</span></span><br><span class="line"><span class="comment"> 可选的参数 ... 取决于特定的 ioctl 命令，可能包含输入参数、输出参数或者不需要参数。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">//查询触摸屏触点信息，存放在info中</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">input_absinfo</span> <span class="title">info</span>;</span></span><br><span class="line"><span class="keyword">if</span>(<span class="number">0</span> &gt; ioctl(fd, EVIOCGABS(ABS_MT_SLOT), &amp;info))&#123;</span><br><span class="line">        perror(<span class="string">&quot;ioctl error&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">/* 常用来处理陀螺仪数据</span></span><br><span class="line"><span class="comment">struct input_absinfo &#123;</span></span><br><span class="line"><span class="comment">	__s32 value;</span></span><br><span class="line"><span class="comment">	__s32 minimum;</span></span><br><span class="line"><span class="comment">	__s32 maximum;</span></span><br><span class="line"><span class="comment">	__s32 fuzz;</span></span><br><span class="line"><span class="comment">	__s32 flat;</span></span><br><span class="line"><span class="comment">	__s32 resolution;</span></span><br><span class="line"><span class="comment">&#125;;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>获取触摸点程序源码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;poll.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/input.h&gt;</span></span></span><br><span class="line"><span class="comment">// /dev/input/event2</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span>&#123;</span><br><span class="line">    <span class="type">char</span> gpio_path[<span class="number">100</span>];</span><br><span class="line">    <span class="type">char</span> file_path[<span class="number">100</span>];</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">input_absinfo</span> <span class="title">info</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">pollfd</span> <span class="title">pfd</span>;</span></span><br><span class="line">    <span class="type">int</span> max_slots;</span><br><span class="line">    <span class="type">int</span> fd;</span><br><span class="line">    <span class="keyword">if</span> (<span class="number">2</span> != argc)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">&quot;usage:%s &lt;gpio&gt; &lt;value&gt;\n&quot;</span>, argv[<span class="number">0</span>]);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="number">0</span> &gt; (fd = open(argv[<span class="number">1</span>],O_RDONLY)))</span><br><span class="line">    &#123;</span><br><span class="line">        perror(<span class="string">&quot;open export error&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(<span class="number">0</span> &gt; ioctl(fd, EVIOCGABS(ABS_MT_SLOT), &amp;info))&#123;</span><br><span class="line">        perror(<span class="string">&quot;ioctl error&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    max_slots = info.maximum - info.minimum;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;max slots: %d\n&quot;</span>,max_slots);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="单点触摸测试"><a href="#单点触摸测试" class="headerlink" title="单点触摸测试"></a>单点触摸测试</h1><h1 id="多点触摸测试"><a href="#多点触摸测试" class="headerlink" title="多点触摸测试"></a>多点触摸测试</h1>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
