@@ -4,10 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Linux嵌入式4-tslib库函数, 我超爱大海的">
-    <meta name="description" content="1、tslib简介
-tslib是为触摸屏设备开发的linux应用层库函数，通过配置conf文件适配触摸屏信息，通过调用函数得到触摸屏的实时触摸点信息。tslib移植过程参考应用开发编程指南第18章。
-2、tslib库函数介绍配置、打开触摸屏">
+    <meta name="keywords" content="FOC硬件日记, 我超爱大海的">
+    <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +17,7 @@ tslib是为触摸屏设备开发的linux应用层库函数，通过配置conf文
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Linux嵌入式4-tslib库函数 | 我超爱大海的</title>
+    <title>FOC硬件日记 | 我超爱大海的</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -334,12 +332,12 @@ tslib是为触摸屏设备开发的linux应用层库函数，通过配置conf文
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Linux嵌入式4-tslib库函数</h1>
+                    <h1 class="description center-align post-title">FOC硬件日记</h1>
                 </div>
             </div>
         </div>
@@ -368,15 +366,6 @@ tslib是为触摸屏设备开发的linux应用层库函数，通过配置conf文
                 </div>
                 <div class="col s5 right-align">
                     
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/Linux%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                Linux嵌入式学习
-                            </a>
-                        
-                    </div>
-                    
                 </div>
             </div>
 
@@ -384,7 +373,7 @@ tslib是为触摸屏设备开发的linux应用层库函数，通过配置conf文
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2024-01-18
+                    2024-01-20
                 </div>
                 
 
@@ -405,16 +394,7 @@ tslib是为触摸屏设备开发的linux应用层库函数，通过配置conf文
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="1、tslib简介"><a href="#1、tslib简介" class="headerlink" title="1、tslib简介"></a>1、tslib简介</h1><p><img src="http://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240118215432029.png" alt="image-20240118215432029"></p>
-<p>tslib是为触摸屏设备开发的linux应用层库函数，通过配置conf文件适配触摸屏信息，通过调用函数得到触摸屏的实时触摸点信息。tslib移植过程参考应用开发编程指南第18章。</p>
-<h1 id="2、tslib库函数介绍"><a href="#2、tslib库函数介绍" class="headerlink" title="2、tslib库函数介绍"></a>2、tslib库函数介绍</h1><p>配置、打开触摸屏设备函数：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;tslib.h&quot;</span></span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">dev_name: 设备节点</span></span><br><span class="line"><span class="comment">nonblock： 0为阻塞方法打开触摸屏设备，非0表示非阻塞</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">struct</span> tsdev *<span class="title function_">ts_open</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *dev_name, <span class="type">int</span> nonblock)</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">参数与上面相同，区别是，dev_name可以设置为NULL，函数会在配置文件读取设备节点</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">struct</span> tsdev *<span class="title function_">ts_setup</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *dev_name, <span class="type">int</span> nonblock)</span></span><br><span class="line"><span class="comment">//关闭触摸屏设备</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">ts_close</span><span class="params">(<span class="keyword">struct</span> tsdev *)</span>;</span><br><span class="line"><span class="comment">//配置触摸屏设备</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">ts_config</span><span class="params">(<span class="keyword">struct</span> tsdev *ts)</span></span><br></pre></td></tr></table></figure>
-
-<hr>
-<p>读取触摸屏数据函数：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">ts_read</span><span class="params">(<span class="keyword">struct</span> tsdev *ts, <span class="keyword">struct</span> ts_sample *samp, <span class="type">int</span> nr)</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">ts_read_mt</span><span class="params">(<span class="keyword">struct</span> tsdev *ts, <span class="keyword">struct</span> ts_sample_mt **samp, <span class="type">int</span> max_slots, <span class="type">int</span> nr)</span></span><br></pre></td></tr></table></figure>
-
-
+                
                 
             </div>
             <hr/>
@@ -440,7 +420,7 @@ tslib是为触摸屏设备开发的linux应用层库函数，通过配置conf文
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://actorjing.github.io/2024/01/18/Linux%E5%B5%8C%E5%85%A5%E5%BC%8F4-tslib%E5%BA%93%E5%87%BD%E6%95%B0/">https://actorjing.github.io/2024/01/18/Linux%E5%B5%8C%E5%85%A5%E5%BC%8F4-tslib%E5%BA%93%E5%87%BD%E6%95%B0/</a>
+                    <a href="https://actorjing.github.io/2024/01/20/FOC%E7%A1%AC%E4%BB%B6%E6%97%A5%E8%AE%B0/">https://actorjing.github.io/2024/01/20/FOC%E7%A1%AC%E4%BB%B6%E6%97%A5%E8%AE%B0/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -521,9 +501,10 @@ tslib是为触摸屏设备开发的linux应用层库函数，通过配置conf文
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2024/01/20/FOC%E7%A1%AC%E4%BB%B6%E6%97%A5%E8%AE%B0/">
                     <div class="card-image">
@@ -541,9 +522,9 @@ tslib是为触摸屏设备开发的linux应用层库函数，通过配置conf文
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2024-01-20
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-01-20
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -552,6 +533,7 @@ tslib是为触摸屏设备开发的linux应用层库函数，通过配置conf文
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -562,13 +544,13 @@ tslib是为触摸屏设备开发的linux应用层库函数，通过配置conf文
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2024/01/16/%E8%99%AB%E5%AD%90%E7%A7%BB%E5%8A%A8%E9%97%AE%E9%A2%98/">
+                <a href="/2024/01/18/Linux%E5%B5%8C%E5%85%A5%E5%BC%8F4-tslib%E5%BA%93%E5%87%BD%E6%95%B0/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="虫子移动问题">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="Linux嵌入式4-tslib库函数">
                         
-                        <span class="card-title">虫子移动问题</span>
+                        <span class="card-title">Linux嵌入式4-tslib库函数</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -579,14 +561,14 @@ tslib是为触摸屏设备开发的linux应用层库函数，通过配置conf文
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-01-16
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-01-18
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
-                                    算法
+                            <a href="/categories/Linux%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    Linux嵌入式学习
                                 </a>
                             
                             
