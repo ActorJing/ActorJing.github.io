@@ -413,6 +413,9 @@
 <p>单片机选型使用STM32F103ZET6（理论上做6路FOC电机都没问题，大炮打蚊子），最初选型考虑STM32G和STM32F4系列，最终由于价格和学习基础理论，采用ZET6（主要因为手头有剩的）。单片机VREF采用3.3V，可能会出现精度问题，暂不考虑。电源设计如下：</p>
 <p><img src="http://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240120235458613.png" alt="image-20240120235458613"></p>
 <p>电路中5V仅作为FD6288Q芯片供电，为了电路简单，使用AMS1117（手头有剩的），MCU和其他电路的3.3V区分，分别使用两个RT9013稳压。完整电路还包括显示，串口，交互按键，暂未完成。</p>
+<h1 id="1-22"><a href="#1-22" class="headerlink" title="1.22"></a>1.22</h1><p>参考柠檬FOC项目，又看到开源博主说FD6288的最低供电为12V，但是看芯片手册输入电压为4~24V，原STC无感电路设计采用5V，电机高速长时间运行时，ams1117处于温热状态，考虑更换为buck电路：</p>
+<p><img src="http://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240122230156017.png" alt="image-20240122230156017"></p>
+<p>FD6288Q仍然使用5V供电。</p>
 
                 
             </div>
