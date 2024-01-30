@@ -54,7 +54,7 @@ windows、服务器、开发板需要处在同一网段，使用虚拟需要添�
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 6.3.0"></head>
+<meta name="generator" content="Hexo 6.3.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -356,7 +356,29 @@ windows、服务器、开发板需要处在同一网段，使用虚拟需要添�
     
     <div class="row">
     <div id="main-content" class="col s12 m12 l9">
-        <!-- 文章内容详情 -->
+        <!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+
+
+<!-- 文章内容详情 -->
 <div id="artDetail">
     <div class="card">
         <div class="card-content article-info">
@@ -402,10 +424,12 @@ windows、服务器、开发板需要处在同一网段，使用虚拟需要添�
         <hr class="clearfix">
 
         
-        <!-- 是否加载使用自带的 prismjs. -->
-        <link rel="stylesheet" href="/libs/prism/prism.min.css">
-        
 
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
         
 
         <div class="card-content article-card-content">
@@ -418,26 +442,34 @@ windows、服务器、开发板需要处在同一网段，使用虚拟需要添�
 <p>最后验证交叉编译工具</p>
 <p>安装nfs过程出现的问题，挂载失败，检查是服务器nfs版本为4，uboot只支持2（原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42212668/article/details/125250873%EF%BC%89">https://blog.csdn.net/qq_42212668/article/details/125250873）</a></p>
 <p><img src="http://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20231007210103881.png" alt="image-20231007210103881"></p>
-<h2 id="配置过程中的常用命令："><a href="#配置过程中的常用命令：" class="headerlink" title="配置过程中的常用命令："></a>配置过程中的常用命令：</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">setenv ipaddr 192.168.1.50</span><br><span class="line">setenv ethaddr b8:ae:1d:01:00:00</span><br><span class="line">setenv gatewayip 192.168.1.1</span><br><span class="line">setenv netmask 255.255.255.0</span><br><span class="line">setenv serverip 192.168.1.253</span><br><span class="line">saveenv</span><br><span class="line"></span><br><span class="line">nfs启动文件系统：</span><br><span class="line">setenv bootargs &#x27;console=ttymxc0,115200 root=/dev/nfs nfsroot=192.168.1.107:/home/wujing/linux/nfs/alientrootfs,proto=tcp rw ip=192.168.1.50:192.168.1.107:192.168.1.1:255.255.255.0::eth0:off&#x27;</span><br><span class="line"></span><br><span class="line">tftp挂载</span><br><span class="line">setenv bootcmd &#x27;tftp 80800000 zImage; tftp 83000000 imx6ull-14x14-emmc-4.3-800x480-c.dtb; bootz 80800000 - 83000000&#x27;</span><br></pre></td></tr></table></figure>
+<h2 id="配置过程中的常用命令："><a href="#配置过程中的常用命令：" class="headerlink" title="配置过程中的常用命令："></a>配置过程中的常用命令：</h2><pre class=" language-shell"><code class="language-shell">setenv ipaddr 192.168.1.50
+setenv ethaddr b8:ae:1d:01:00:00
+setenv gatewayip 192.168.1.1
+setenv netmask 255.255.255.0
+setenv serverip 192.168.1.253
+saveenv
 
+nfs启动文件系统：
+setenv bootargs 'console=ttymxc0,115200 root=/dev/nfs nfsroot=192.168.1.107:/home/wujing/linux/nfs/alientrootfs,proto=tcp rw ip=192.168.1.50:192.168.1.107:192.168.1.1:255.255.255.0::eth0:off'
 
-
+tftp挂载
+setenv bootcmd 'tftp 80800000 zImage; tftp 83000000 imx6ull-14x14-emmc-4.3-800x480-c.dtb; bootz 80800000 - 83000000'
+</code></pre>
 <h1 id="应用开发环境启动："><a href="#应用开发环境启动：" class="headerlink" title="应用开发环境启动："></a>应用开发环境启动：</h1><p>启动Ubuntu，mobaX连接开发板，检查Ubuntu的IP地址和开发板uboot中设置的tftp服务器地址是否一致，不一致使用以下命令修改：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setenv serverip 192.168.1.253</span><br></pre></td></tr></table></figure>
-
+<pre class=" language-shell"><code class="language-shell">setenv serverip 192.168.1.253
+</code></pre>
 <p><img src="http://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240114122139754.png" alt="image-20240114122139754"></p>
 <p><strong>检查虚拟机网络设置，VMnet1为net模式，用来虚拟机上网，VMnet0为桥接模式，用来连接开发板挂载。</strong></p>
 <p>检查无误后在uboot中输入boot启动</p>
 <p>nfs挂载根文件系统目录 ：&#x2F;home&#x2F;wujing&#x2F;linux&#x2F;nfs&#x2F;alientrootfs</p>
 <p>应用程序源码存放目录：&#x2F;home&#x2F;wujing&#x2F;Desktop&#x2F;alitenk-test</p>
 <p>常用命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">printenv #查看环境变量</span><br><span class="line">boot #启动linux</span><br></pre></td></tr></table></figure>
-
+<pre class=" language-uboot"><code class="language-uboot">printenv #查看环境变量
+boot #启动linux
+</code></pre>
 <p>使能Ubuntu环境变量</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /opt/fsl-imx-x11/4.1.15-2.1.0/environment-setup-cortexa7hf-neon-poky-linux-gnueabi</span><br></pre></td></tr></table></figure>
-
-
-
+<pre class=" language-shell"><code class="language-shell">source /opt/fsl-imx-x11/4.1.15-2.1.0/environment-setup-cortexa7hf-neon-poky-linux-gnueabi
+</code></pre>
 
                 
             </div>
@@ -636,9 +668,6 @@ windows、服务器、开发板需要处在同一网段，使用虚拟需要添�
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
 
-  <!-- 是否加载使用自带的 prismjs. -->
-  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
-
 
 <!-- 代码语言 -->
 
@@ -651,6 +680,8 @@ windows、服务器、开发板需要处在同一网段，使用虚拟需要添�
 
 
 <!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
 
 
 
