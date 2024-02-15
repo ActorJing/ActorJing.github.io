@@ -4,6 +4,44 @@
   
     
     <entry>
+      <title>2024-2-15东至县城</title>
+      <link href="/2024/02/15/2024-2-15%E4%B8%9C%E8%87%B3%E5%8E%BF%E5%9F%8E/"/>
+      <url>/2024/02/15/2024-2-15%E4%B8%9C%E8%87%B3%E5%8E%BF%E5%9F%8E/</url>
+      
+        <content type="html"><![CDATA[<p><img src="http://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/DSC_5401.jpg" alt="DSC_5401"></p><p><img src="http://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/DSC_5355.jpg" alt="DSC_5355"></p><p><img src="http://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/DSC_5372.jpg" alt="DSC_5372"></p><p><img src="http://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/DSC_5347.jpg" alt="DSC_5347"></p><p><img src="http://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/DSC_5335.jpg" alt="DSC_5335"></p><p><img src="http://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/DSC_5345.jpg" alt="DSC_5345"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 摄影日记 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>嵌入式Linux6-UART串口</title>
+      <link href="/2024/02/06/%E5%B5%8C%E5%85%A5%E5%BC%8FLinux6-UART%E4%B8%B2%E5%8F%A3/"/>
+      <url>/2024/02/06/%E5%B5%8C%E5%85%A5%E5%BC%8FLinux6-UART%E4%B8%B2%E5%8F%A3/</url>
+      
+        <content type="html"><![CDATA[<h1 id="UART串口"><a href="#UART串口" class="headerlink" title="UART串口"></a>UART串口</h1><hr><h2 id="1、UART串口配置结构体"><a href="#1、UART串口配置结构体" class="headerlink" title="1、UART串口配置结构体"></a>1、UART串口配置结构体</h2><pre class=" language-c"><code class="language-c"><span class="token keyword">struct</span> termios  <span class="token punctuation">{</span>    tcflag_t c_iflag<span class="token punctuation">;</span><span class="token comment" spellcheck="true">/* input mode flags */</span>    tcflag_t c_oflag<span class="token punctuation">;</span><span class="token comment" spellcheck="true">/* output mode flags */</span>    tcflag_t c_cflag<span class="token punctuation">;</span><span class="token comment" spellcheck="true">/* control mode flags */</span>    tcflag_t c_lflag<span class="token punctuation">;</span><span class="token comment" spellcheck="true">/* local mode flags */</span>    cc_t c_line<span class="token punctuation">;</span><span class="token comment" spellcheck="true">/* line discipline */</span>    cc_t c_cc<span class="token punctuation">[</span>NCCS<span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">/* control characters */</span>    speed_t c_ispeed<span class="token punctuation">;</span><span class="token comment" spellcheck="true">/* input speed */</span>    speed_t c_ospeed<span class="token punctuation">;</span><span class="token comment" spellcheck="true">/* output speed */</span><span class="token macro property">#<span class="token directive keyword">define</span> _HAVE_STRUCT_TERMIOS_C_ISPEED 1</span><span class="token macro property">#<span class="token directive keyword">define</span> _HAVE_STRUCT_TERMIOS_C_OSPEED 1</span>  <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><p>串口属于一种终端设备，除此之外还包括常见的ssh等，它们都遵循终端统一的结构体termios，</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux嵌入式学习 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Linux嵌入式5-FrameBuffer应用编程</title>
       <link href="/2024/01/31/Linux%E5%B5%8C%E5%85%A5%E5%BC%8F5-FrameBuffer%E5%BA%94%E7%94%A8%E7%BC%96%E7%A8%8B/"/>
       <url>/2024/01/31/Linux%E5%B5%8C%E5%85%A5%E5%BC%8F5-FrameBuffer%E5%BA%94%E7%94%A8%E7%BC%96%E7%A8%8B/</url>
