@@ -26,7 +26,7 @@
 <meta property="og:description" content="3.19搭建环境同步器程序设计 3.20同步器程序调试 发送多路同步脉冲出，单脉冲，持续脉冲 3.21同步器程序完成压力手掌分布接口布线鞋垫FPC接口设计 3.22足底采集电路布线完成鞋垫接口测试 3.25fpc连接接口设计完成ADC采集程序调试 右脚16pin在上 3.26-电路设计ADC电容尽量靠近单片机，ADC芯片到单片机的输入输出高阻抗，中间走线尽可能短-adc走线需要注意下电流-退藕电容">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-05T13:57:10.000Z">
-<meta property="article:modified_time" content="2024-07-05T14:29:58.210Z">
+<meta property="article:modified_time" content="2024-07-05T16:05:23.827Z">
 <meta property="article:author" content="Jing Wu">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
@@ -55,7 +55,7 @@
       
       <div class="profile-block text-center">
         <a id="avatar" href="https://github.com/ActorJing" target="_blank">
-          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+          <img class="img-circle img-rotate" src="/images/actor.jpg" width="200" height="200">
         </a>
         <h2 id="name" class="hidden-xs hidden-sm">我超爱大海的</h2>
         <h3 id="title" class="hidden-xs hidden-sm hidden-md">long time no see</h3>
@@ -273,6 +273,15 @@
 
   
   
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-19"><span class="toc-number">1.</span> <span class="toc-text">3.19</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-20"><span class="toc-number">2.</span> <span class="toc-text">3.20</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-21"><span class="toc-number">3.</span> <span class="toc-text">3.21</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-22"><span class="toc-number">4.</span> <span class="toc-text">3.22</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-25"><span class="toc-number">5.</span> <span class="toc-text">3.25</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-26"><span class="toc-number">6.</span> <span class="toc-text">3.26</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-27"><span class="toc-number">7.</span> <span class="toc-text">3.27</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-28"><span class="toc-number">8.</span> <span class="toc-text">3.28</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-29"><span class="toc-number">9.</span> <span class="toc-text">3.29</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1"><span class="toc-number">10.</span> <span class="toc-text">4.1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2"><span class="toc-number">11.</span> <span class="toc-text">4.2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3"><span class="toc-number">12.</span> <span class="toc-text">4.3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-7-8"><span class="toc-number">13.</span> <span class="toc-text">4.7-8</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-9-4-16"><span class="toc-number">14.</span> <span class="toc-text">4.9-4.16</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-17"><span class="toc-number">15.</span> <span class="toc-text">4.17</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-18"><span class="toc-number">16.</span> <span class="toc-text">4.18</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-28"><span class="toc-number">17.</span> <span class="toc-text">4.28</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-29-30"><span class="toc-number">18.</span> <span class="toc-text">4.29-30</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-6"><span class="toc-number">19.</span> <span class="toc-text">5.6</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-7"><span class="toc-number">20.</span> <span class="toc-text">5.7</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-8"><span class="toc-number">21.</span> <span class="toc-text">5.8</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-9"><span class="toc-number">22.</span> <span class="toc-text">5.9</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-10"><span class="toc-number">23.</span> <span class="toc-text">5.10</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-11"><span class="toc-number">24.</span> <span class="toc-text">5.11</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-13"><span class="toc-number">25.</span> <span class="toc-text">5.13</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-14"><span class="toc-number">26.</span> <span class="toc-text">5.14</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-15-17"><span class="toc-number">27.</span> <span class="toc-text">5.15-17</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-22"><span class="toc-number">28.</span> <span class="toc-text">5.22</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-23"><span class="toc-number">29.</span> <span class="toc-text">5.23</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-24"><span class="toc-number">30.</span> <span class="toc-text">5.24</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-27"><span class="toc-number">31.</span> <span class="toc-text">5.27</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-28-6-14"><span class="toc-number">32.</span> <span class="toc-text">5.28-6.14</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-17-6-21"><span class="toc-number">33.</span> <span class="toc-text">6.17-6.21</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-22-%E5%8A%A0%E7%8F%AD"><span class="toc-number">34.</span> <span class="toc-text">6.22 加班</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-24"><span class="toc-number">35.</span> <span class="toc-text">6.24</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-25"><span class="toc-number">36.</span> <span class="toc-text">6.25</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-26-6-28"><span class="toc-number">37.</span> <span class="toc-text">6.26-6.28</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1"><span class="toc-number">38.</span> <span class="toc-text">7.1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2"><span class="toc-number">39.</span> <span class="toc-text">7.2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3"><span class="toc-number">40.</span> <span class="toc-text">7.3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4"><span class="toc-number">41.</span> <span class="toc-text">7.4</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
 <main class="main" role="main">
   <div class="content">
   <article id="post-工作日志" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
@@ -388,7 +397,7 @@
     <figure class="media">
       <div class="media-left">
         <a href="https://github.com/ActorJing" target="_blank" class="img-burn thumb-sm visible-lg">
-          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+          <img src="/images/actor.jpg" class="img-rounded w-full" alt="">
         </a>
       </div>
       <div class="media-body">
@@ -425,6 +434,14 @@
     </li>
     
     
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
   </ul>
   
   
@@ -439,7 +456,7 @@
 
 </main>
 
-  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+  <!-- <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
 	
     <div class="copyright">
     	
@@ -447,7 +464,8 @@
         	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
         </div>
     </div>
-</footer>
+</footer> -->
+
   <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
 <script>
 window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')

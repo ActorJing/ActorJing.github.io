@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/8118a23003076a7df800a48e2338f7d.jpg">
 <meta property="article:published_time" content="2024-01-31T03:49:08.000Z">
-<meta property="article:modified_time" content="2024-02-04T17:31:45.203Z">
+<meta property="article:modified_time" content="2024-07-05T16:06:08.231Z">
 <meta property="article:author" content="Jing Wu">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/8118a23003076a7df800a48e2338f7d.jpg">
@@ -57,7 +57,7 @@
       
       <div class="profile-block text-center">
         <a id="avatar" href="https://github.com/ActorJing" target="_blank">
-          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+          <img class="img-circle img-rotate" src="/images/actor.jpg" width="200" height="200">
         </a>
         <h2 id="name" class="hidden-xs hidden-sm">我超爱大海的</h2>
         <h3 id="title" class="hidden-xs hidden-sm hidden-md">long time no see</h3>
@@ -275,6 +275,15 @@
 
   
   
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#FrameBuffer%E5%BA%94%E7%94%A8%E7%BC%96%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">FrameBuffer应用编程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E5%86%85%E5%AD%98%E6%98%A0%E5%B0%84"><span class="toc-number">1.1.</span> <span class="toc-text">1、内存映射</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81LCD%E5%BA%94%E7%94%A8%E7%BC%96%E7%A8%8B%E6%B5%81%E7%A8%8B"><span class="toc-number">1.2.</span> <span class="toc-text">2、LCD应用编程流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E5%B1%9E%E6%80%A7%E7%BB%93%E6%9E%84%E4%BD%93%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.3.</span> <span class="toc-text">3、属性结构体介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81%E5%AD%98%E5%82%A8%E6%98%A0%E5%B0%84"><span class="toc-number">1.4.</span> <span class="toc-text">4、存储映射</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E3%80%81%E6%98%BE%E7%A4%BA%E6%95%88%E6%9E%9C"><span class="toc-number">1.5.</span> <span class="toc-text">5、显示效果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6%E3%80%81%E7%A8%8B%E5%BA%8F%E6%BA%90%E7%A0%81"><span class="toc-number">1.6.</span> <span class="toc-text">6、程序源码</span></a></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
 <main class="main" role="main">
   <div class="content">
   <article id="post-Linux嵌入式5-FrameBuffer应用编程" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
@@ -572,7 +581,7 @@ screen_base <span class="token operator">=</span> <span class="token function">m
     <figure class="media">
       <div class="media-left">
         <a href="https://github.com/ActorJing" target="_blank" class="img-burn thumb-sm visible-lg">
-          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+          <img src="/images/actor.jpg" class="img-rounded w-full" alt="">
         </a>
       </div>
       <div class="media-body">
@@ -613,6 +622,14 @@ screen_base <span class="token operator">=</span> <span class="token function">m
     </li>
     
     
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
   </ul>
   
   
@@ -627,7 +644,7 @@ screen_base <span class="token operator">=</span> <span class="token function">m
 
 </main>
 
-  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+  <!-- <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
 	
     <div class="copyright">
     	
@@ -635,7 +652,8 @@ screen_base <span class="token operator">=</span> <span class="token function">m
         	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
         </div>
     </div>
-</footer>
+</footer> -->
+
   <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
 <script>
 window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')

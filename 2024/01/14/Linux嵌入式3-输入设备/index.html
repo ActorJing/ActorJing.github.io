@@ -29,7 +29,7 @@
 <meta property="og:image" content="http://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240114212415740.png">
 <meta property="og:image" content="http://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240118215126784.png">
 <meta property="article:published_time" content="2024-01-14T11:04:22.000Z">
-<meta property="article:modified_time" content="2024-01-18T13:51:36.809Z">
+<meta property="article:modified_time" content="2024-07-05T16:06:22.690Z">
 <meta property="article:author" content="Jing Wu">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240114204650594.png">
@@ -59,7 +59,7 @@
       
       <div class="profile-block text-center">
         <a id="avatar" href="https://github.com/ActorJing" target="_blank">
-          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+          <img class="img-circle img-rotate" src="/images/actor.jpg" width="200" height="200">
         </a>
         <h2 id="name" class="hidden-xs hidden-sm">我超爱大海的</h2>
         <h3 id="title" class="hidden-xs hidden-sm hidden-md">long time no see</h3>
@@ -277,6 +277,15 @@
 
   
   
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E8%BE%93%E5%85%A5%E7%B1%BB%E8%AE%BE%E5%A4%87%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">1、输入类设备描述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81linux%E5%86%85%E6%A0%B8%E6%8F%8F%E8%BF%B0"><span class="toc-number">2.</span> <span class="toc-text">2、linux内核描述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E8%AE%BE%E5%A4%87%E6%8F%8F%E8%BF%B0%E4%BA%8B%E4%BB%B6"><span class="toc-number">2.0.1.</span> <span class="toc-text">输入设备描述事件</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%E3%80%81%E8%AF%BB%E5%8F%96%E5%BC%80%E5%8F%91%E6%9D%BF%E4%B8%8A%E6%8A%A5%E4%BA%8B%E4%BB%B6"><span class="toc-number">3.</span> <span class="toc-text">3、读取开发板上报事件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4%E3%80%81%E8%A7%A6%E6%91%B8%E5%B1%8F%E4%B8%8A%E6%8A%A5%E4%BA%8B%E4%BB%B6%E5%88%86%E6%9E%90"><span class="toc-number">4.</span> <span class="toc-text">4、触摸屏上报事件分析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5%E3%80%81%E5%8D%95%E7%82%B9%E8%A7%A6%E6%91%B8%E6%B5%8B%E8%AF%95"><span class="toc-number">5.</span> <span class="toc-text">5、单点触摸测试</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6%E3%80%81%E5%A4%9A%E7%82%B9%E8%A7%A6%E6%91%B8%E6%B5%8B%E8%AF%95"><span class="toc-number">6.</span> <span class="toc-text">6、多点触摸测试</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
 <main class="main" role="main">
   <div class="content">
   <article id="post-Linux嵌入式3-输入设备" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
@@ -643,7 +652,7 @@ mt: ts_mt数组指针
     <figure class="media">
       <div class="media-left">
         <a href="https://github.com/ActorJing" target="_blank" class="img-burn thumb-sm visible-lg">
-          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+          <img src="/images/actor.jpg" class="img-rounded w-full" alt="">
         </a>
       </div>
       <div class="media-body">
@@ -684,6 +693,14 @@ mt: ts_mt数组指针
     </li>
     
     
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
   </ul>
   
   
@@ -698,7 +715,7 @@ mt: ts_mt数组指针
 
 </main>
 
-  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+  <!-- <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
 	
     <div class="copyright">
     	
@@ -706,7 +723,8 @@ mt: ts_mt数组指针
         	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
         </div>
     </div>
-</footer>
+</footer> -->
+
   <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
 <script>
 window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
