@@ -1,3 +1,5 @@
+https://actorjing.github.io/2024/07/07/paper/
+https://actorjing.github.io/2024/07/06/cubeMX%E4%BD%BF%E7%94%A8LwIP/
 https://actorjing.github.io/book/index.html
 https://actorjing.github.io/2024/07/06/%E7%AC%94%E8%AE%B0%E4%B8%8A%E4%BC%A0%E6%AD%A5%E9%AA%A4/
 https://actorjing.github.io/2024/01/13/2024-1-6%E5%A7%A5%E5%B1%B1%E5%B2%9B/
@@ -26,3 +28,5 @@ https://actorjing.github.io/categories/Linux%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6
 https://actorjing.github.io/categories/%E5%B7%A5%E4%BD%9C%E6%97%A5%E5%BF%97/
 https://actorjing.github.io/categories/%E7%AE%97%E6%B3%95/
 https://actorjing.github.io/categories/%E7%AC%94%E8%AE%B0%E4%B8%8A%E4%BC%A0/
+https://actorjing.github.io/categories/ARM%E5%B5%8C%E5%85%A5%E5%BC%8F/
+https://actorjing.github.io/categories/%E8%AE%BA%E6%96%87/
