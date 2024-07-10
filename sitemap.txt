@@ -1,3 +1,4 @@
+https://actorjing.github.io/2024/07/05/%E5%B7%A5%E4%BD%9C%E6%97%A5%E5%BF%97/
 https://actorjing.github.io/2024/07/07/%E5%82%A8%E8%83%BD%E4%B8%80%E6%AC%A1%E8%B0%83%E9%A2%91%E6%96%87%E7%8C%AE/
 https://actorjing.github.io/2024/07/07/%E5%82%A8%E8%83%BD%E4%B8%80%E6%AC%A1%E8%B0%83%E9%A2%91%E6%96%B9%E6%A1%88/
 https://actorjing.github.io/2024/07/06/cubeMX%E4%BD%BF%E7%94%A8LwIP/
@@ -16,7 +17,6 @@ https://actorjing.github.io/2024/01/18/Linux%E5%B5%8C%E5%85%A5%E5%BC%8F4-tslib%E
 https://actorjing.github.io/2024/01/31/Linux%E5%B5%8C%E5%85%A5%E5%BC%8F5-FrameBuffer%E5%BA%94%E7%94%A8%E7%BC%96%E7%A8%8B/
 https://actorjing.github.io/2024/02/06/%E5%B5%8C%E5%85%A5%E5%BC%8FLinux6-UART%E4%B8%B2%E5%8F%A3/
 https://actorjing.github.io/2024/01/16/%E8%99%AB%E5%AD%90%E7%A7%BB%E5%8A%A8%E9%97%AE%E9%A2%98/
-https://actorjing.github.io/2024/07/05/%E5%B7%A5%E4%BD%9C%E6%97%A5%E5%BF%97/
 https://actorjing.github.io/about/index.html
 https://actorjing.github.io/categories/index.html
 https://actorjing.github.io/tags/index.html
