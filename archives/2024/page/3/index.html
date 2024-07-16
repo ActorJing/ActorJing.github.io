@@ -17,26 +17,16 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>FOC硬件日记（正在更新） | 我超爱大海的</title>
-  <meta name="description" content="1.20硬件设计，参考STC的无感BLDC方案，但是主控更换为STM32，三相逆变器采用FD6288Q，使用mos桥方式支持大电流（考虑小电流drv8313方案，只支持2A电流，仍然需要加mos驱动，考虑成本选择FD6288Q）。考虑加入电流环，电流检测采用INA199A1DCKR。下图为三相逆变电路及电流检测：  存在验证的问题： 问题1：FD6288官方手册外围电路中需要增加自举电阻，参考开源">
-<meta property="og:type" content="article">
-<meta property="og:title" content="FOC硬件日记（正在更新）">
-<meta property="og:url" content="https://actorjing.github.io/2024/01/20/FOC%E7%A1%AC%E4%BB%B6%E6%97%A5%E8%AE%B0/index.html">
+  <title>归档: 2024 | 我超爱大海的</title>
+  <meta property="og:type" content="website">
+<meta property="og:title" content="我超爱大海的">
+<meta property="og:url" content="https://actorjing.github.io/archives/2024/page/3/index.html">
 <meta property="og:site_name" content="我超爱大海的">
-<meta property="og:description" content="1.20硬件设计，参考STC的无感BLDC方案，但是主控更换为STM32，三相逆变器采用FD6288Q，使用mos桥方式支持大电流（考虑小电流drv8313方案，只支持2A电流，仍然需要加mos驱动，考虑成本选择FD6288Q）。考虑加入电流环，电流检测采用INA199A1DCKR。下图为三相逆变电路及电流检测：  存在验证的问题： 问题1：FD6288官方手册外围电路中需要增加自举电阻，参考开源">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240120234842699.png">
-<meta property="og:image" content="http://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240120235458613.png">
-<meta property="og:image" content="http://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240122230156017.png">
-<meta property="og:image" content="http://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240124210149669.png">
-<meta property="og:image" content="http://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240124210213483.png">
-<meta property="article:published_time" content="2024-01-20T15:33:48.000Z">
-<meta property="article:modified_time" content="2024-07-05T16:06:37.296Z">
 <meta property="article:author" content="Jing Wu">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240120234842699.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://actorjing.github.io/2024/01/20/FOC%E7%A1%AC%E4%BB%B6%E6%97%A5%E8%AE%B0/index.html">
+  <link rel="canonical" href="https://actorjing.github.io/archives/2024/page/3/index.html">
   
     <link rel="alternate" href="/atom.xml" title="我超爱大海的" type="application/atom+xml">
   
@@ -289,154 +279,75 @@
 
   
   
-  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
-  <div class="slimContent">
-    <nav id="toc" class="article-toc">
-      <h3 class="toc-title">文章目录</h3>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-20"><span class="toc-number">1.</span> <span class="toc-text">1.20</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-22"><span class="toc-number">2.</span> <span class="toc-text">1.22</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-24"><span class="toc-number">3.</span> <span class="toc-text">1.24</span></a></li></ol>
-    </nav>
-  </div>
-</aside>
-
 <main class="main" role="main">
-  <div class="content">
-  <article id="post-FOC硬件日记" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-    
-    <div class="article-header">
-      
-        
+  	<article class="content article article-archives article-type-list" itemscope="">
+	    <header class="article-header">
+	      <h1 itemprop="title">归档: 2024</h1>
+	      <p class="text-muted">共 21 篇文章</p>
+	    </header>
+	    <div class="article-body">
+	      
   
-    <h1 class="article-title" itemprop="name">
-      FOC硬件日记（正在更新）
-    </h1>
-  
-
-      
-      <div class="article-meta">
-        <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2024/01/20/FOC%E7%A1%AC%E4%BB%B6%E6%97%A5%E8%AE%B0/" class="article-date">
-	  <time datetime="2024-01-20T15:33:48.000Z" itemprop="datePublished">2024-01-20</time>
-	</a>
-</span>
-        
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/FOC%E5%AD%A6%E4%B9%A0/">FOC学习</a>
-  </span>
-
-        
-
-        
-
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2024/01/20/FOC%E7%A1%AC%E4%BB%B6%E6%97%A5%E8%AE%B0/#comments" class="article-comment-link">评论</a></span>
-        
-      </div>
-    </div>
-    <div class="article-entry marked-body" itemprop="articleBody">
-      
-        <h1 id="1-20"><a href="#1-20" class="headerlink" title="1.20"></a>1.20</h1><p>硬件设计，参考STC的无感BLDC方案，但是主控更换为STM32，三相逆变器采用FD6288Q，使用mos桥方式支持大电流（考虑小电流drv8313方案，只支持2A电流，仍然需要加mos驱动，考虑成本选择FD6288Q）。考虑加入电流环，电流检测采用INA199A1DCKR。下图为三相逆变电路及电流检测：</p>
-<p><img src="http://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240120234842699.png" alt="image-20240120234842699"></p>
-<p>存在验证的问题：</p>
-<p>问题1：FD6288官方手册外围电路中需要增加自举电阻，参考开源方案并没有加入自举电阻，</p>
-<p>问题2：电流检测放在半桥的下桥接地，理论上放在哪儿无影响</p>
-<p>问题3：电流检测压差采用分压电阻得到1.65V，参考STM32F103C的FOC方案设计，C系列无VREF</p>
-<hr>
-<p>单片机选型使用STM32F103ZET6（理论上做6路FOC电机都没问题，大炮打蚊子），最初选型考虑STM32G和STM32F4系列，最终由于价格和学习基础理论，采用ZET6（主要因为手头有剩的）。单片机VREF采用3.3V，可能会出现精度问题，暂不考虑。电源设计如下：</p>
-<p><img src="http://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240120235458613.png" alt="image-20240120235458613"></p>
-<p>电路中5V仅作为FD6288Q芯片供电，为了电路简单，使用AMS1117（手头有剩的），MCU和其他电路的3.3V区分，分别使用两个RT9013稳压。完整电路还包括显示，串口，交互按键，暂未完成。</p>
-<h1 id="1-22"><a href="#1-22" class="headerlink" title="1.22"></a>1.22</h1><p>参考柠檬FOC项目，又看到开源博主说FD6288的最低供电为12V，但是看芯片手册输入电压为4~24V，原STC无感电路设计采用5V，电机高速长时间运行时，ams1117处于温热状态，考虑更换为buck电路：</p>
-<p><img src="http://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240122230156017.png" alt="image-20240122230156017"></p>
-<p>FD6288Q仍然使用5V供电。</p>
-<h1 id="1-24"><a href="#1-24" class="headerlink" title="1.24"></a>1.24</h1><p>完成原理图设计和PCB大致布局，完善USB串口，交互按键和LED指示灯。完整原理图如下：</p>
-<p><img src="http://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240124210149669.png" alt="image-20240124210149669"></p>
-<p><img src="http://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240124210213483.png" alt="image-20240124210213483"></p>
-<p>电机接口考虑使用铜皮开窗，使用香蕉头和电机连接，或直接焊接。</p>
-
-      
-    </div>
-    <div class="article-footer">
-      <blockquote class="mt-2x">
-  <ul class="post-copyright list-unstyled">
-    
-    <li class="post-copyright-link hidden-xs">
-      <strong>本文链接：</strong>
-      <a href="https://actorjing.github.io/2024/01/20/FOC%E7%A1%AC%E4%BB%B6%E6%97%A5%E8%AE%B0/" title="FOC硬件日记（正在更新）" target="_blank" rel="external">https://actorjing.github.io/2024/01/20/FOC硬件日记/</a>
-    </li>
-    
-    <li class="post-copyright-license">
-      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
-    </li>
-  </ul>
-</blockquote>
-
-
-<div class="panel panel-default panel-badger">
-  <div class="panel-body">
-    <figure class="media">
-      <div class="media-left">
-        <a href="https://github.com/ActorJing" target="_blank" class="img-burn thumb-sm visible-lg">
-          <img src="/images/actor.jpg" class="img-rounded w-full" alt="">
-        </a>
-      </div>
-      <div class="media-body">
-        <h3 class="media-heading"><a href="https://github.com/ActorJing" target="_blank"><span class="text-dark">我超爱大海的</span><small class="ml-1x">long time no see</small></a></h3>
-        <div>个人简介。</div>
-      </div>
-    </figure>
-  </div>
-</div>
-
-
-    </div>
-  </article>
   
     
-  <section id="comments">
+    
+      
+      
+      <section class="panel panel-default b-no">
+        <div class="panel-heading" role="tab">
+          <h3 class="panel-title">
+            <a data-toggle="collapse" href="#collapse2024" aria-expanded="true">
+              <i class="icon icon-calendar-plus text-active"></i><i class="icon icon-calendar-minus text"></i>
+              2024
+            </a>
+            <!-- <a href="/archives/2024" class="archive-year">2024</a> -->
+          </h3>
+        </div>
+        <div id="collapse2024" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading2024">
+        <div class="panel-body">
+          <div class="collection">
+    
+    
+<a href="/2024/01/13/FOC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="collection-item"   itemprop="url">
+  <time datetime="2024-01-13T06:07:09.000Z" itemprop="datePublished">2024-01-13</time>
+  <span>&nbsp;&nbsp;&nbsp;</span> FOC学习笔记
+</a>
+
+
+  
+  
+    </div></div></div></section>
+  
+
+	    </div>
+  	</article>
   	
-      <div id="vcomments"></div>
     
-  </section>
-
-
-  
-</div>
-
-  <nav class="bar bar-footer clearfix" data-stick-bottom>
-  <div class="bar-inner">
-  
-  <ul class="pager pull-left">
+    <nav class="bar bar-footer clearfix" data-stick-bottom>
+        <div class="bar-inner">
+        <ul class="pager pull-left">
+            
+            <li class="prev">
+                <a href="/archives/2024/page/2/">
+                    <i class="icon icon-angle-left"></i>
+                    上一页
+                </a>
+            </li>
+            
+            
+            <li class="next disabled">
+                <a href="javascript:;">
+                    下一页
+                    <i class="icon icon-angle-right"></i>                    
+                </a>
+            </li>
+            
+        </ul>
+            <div class="total-article bar-right">Page 3 of 3</div>
+        </div>
+    </nav>
     
-    <li class="prev">
-      <a href="/2024/01/21/2024-1-21%E5%9F%8E%E9%9A%8D%E5%BA%99/" title="2024-1-21城隍庙"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
-    </li>
-    
-    
-    <li class="next">
-      <a href="/2024/01/18/Linux%E5%B5%8C%E5%85%A5%E5%BC%8F4-tslib%E5%BA%93%E5%87%BD%E6%95%B0/" title="Linux嵌入式4-tslib库函数"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
-    </li>
-    
-    
-    <li class="toggle-toc">
-      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
-        <i class="text-collapsed icon icon-anchor"></i>
-        <i class="text-in icon icon-close"></i>
-        <span>]</span>
-      </a>
-    </li>
-    
-  </ul>
-  
-  
-  
-  <div class="bar-right">
-    
-  </div>
-  </div>
-</nav>
-  
-
-
+ 	
 </main>
 
   <!-- <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -483,37 +394,6 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
-
-   
-
-
-
-
-   
-    
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/valine"></script>
-  <script type="text/javascript">
-  var GUEST = ['nick', 'mail', 'link'];
-  var meta = 'nick,mail,link';
-  meta = meta.split(',').filter(function(item) {
-    return GUEST.indexOf(item) > -1;
-  });
-  new Valine({
-    el: '#vcomments',
-    verify: false,
-    notify: false,
-    appId: 'tYxMN2OZzN0cW9hwBDlP5EEV-gzGzoHsz',
-    appKey: '2KwEcCdsaVhXls99AiMISWuZ',
-    placeholder: 'Just go go',
-    avatar: 'mm',
-    meta: meta,
-    pageSize: '10' || 10,
-    visitor: false
-  });
-  </script>
-
-     
 
 
 

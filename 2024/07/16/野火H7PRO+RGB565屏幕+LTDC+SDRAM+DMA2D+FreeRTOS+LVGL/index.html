@@ -21,7 +21,7 @@
   <meta name="description" content="野火H7PRO+RGB565屏幕+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL时钟配置，功率优化设置为0，设置主频480M，FMC240M，LTDC50M  野火开发板使用FMC的CKE1连接SDRAM使用bank2，地址为0xD0000000，cubemx配置如下：（注意GPIO，一开始使用bank1刷图正常，画点错误，发现是IO配置错误，理论上刷图也会报错）  配置LTDC：（">
 <meta property="og:type" content="article">
 <meta property="og:title" content="野火H7PRO+RGB565屏幕+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL">
-<meta property="og:url" content="https://actorjing.github.io/2024/07/06/%E9%87%8E%E7%81%ABH7PRO+RGB565%E5%B1%8F%E5%B9%95+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL/index.html">
+<meta property="og:url" content="https://actorjing.github.io/2024/07/16/%E9%87%8E%E7%81%ABH7PRO+RGB565%E5%B1%8F%E5%B9%95+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL/index.html">
 <meta property="og:site_name" content="我超爱大海的">
 <meta property="og:description" content="野火H7PRO+RGB565屏幕+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL时钟配置，功率优化设置为0，设置主频480M，FMC240M，LTDC50M  野火开发板使用FMC的CKE1连接SDRAM使用bank2，地址为0xD0000000，cubemx配置如下：（注意GPIO，一开始使用bank1刷图正常，画点错误，发现是IO配置错误，理论上刷图也会报错）  配置LTDC：（">
 <meta property="og:locale" content="zh_CN">
@@ -36,13 +36,13 @@
 <meta property="og:image" content="https://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240715161349234.png">
 <meta property="og:image" content="https://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240716191727743.png">
 <meta property="og:image" content="https://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240716192339242.png">
-<meta property="article:published_time" content="2024-07-06T15:27:23.000Z">
-<meta property="article:modified_time" content="2024-07-16T12:29:33.024Z">
+<meta property="article:published_time" content="2024-07-16T15:27:23.000Z">
+<meta property="article:modified_time" content="2024-07-16T12:31:28.174Z">
 <meta property="article:author" content="Jing Wu">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240715170751977.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://actorjing.github.io/2024/07/06/%E9%87%8E%E7%81%ABH7PRO+RGB565%E5%B1%8F%E5%B9%95+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL/index.html">
+  <link rel="canonical" href="https://actorjing.github.io/2024/07/16/%E9%87%8E%E7%81%ABH7PRO+RGB565%E5%B1%8F%E5%B9%95+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL/index.html">
   
     <link rel="alternate" href="/atom.xml" title="我超爱大海的" type="application/atom+xml">
   
@@ -185,7 +185,7 @@
   <div class="widget">
     <h3 class="widget-title">分类</h3>
     <div class="widget-body">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ARM%E5%B5%8C%E5%85%A5%E5%BC%8F/">ARM嵌入式</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/FOC%E5%AD%A6%E4%B9%A0/">FOC学习</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0/">Linux嵌入式学习</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E4%BD%9C%E6%97%A5%E5%BF%97/">工作日志</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%91%84%E5%BD%B1%E6%97%A5%E8%AE%B0/">摄影日记</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AC%94%E8%AE%B0%E4%B8%8A%E4%BC%A0/">笔记上传</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BA%E6%96%87/">论文</a><span class="category-list-count">2</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ARM%E5%B5%8C%E5%85%A5%E5%BC%8F/">ARM嵌入式</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/FOC%E5%AD%A6%E4%B9%A0/">FOC学习</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0/">Linux嵌入式学习</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E4%BD%9C%E6%97%A5%E5%BF%97/">工作日志</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%91%84%E5%BD%B1%E6%97%A5%E8%AE%B0/">摄影日记</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E9%A1%B9/">杂项</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AC%94%E8%AE%B0%E4%B8%8A%E4%BC%A0/">笔记上传</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BA%E6%96%87/">论文</a><span class="category-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -197,7 +197,7 @@
   <div class="widget">
     <h3 class="widget-title">归档</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/07/">七月 2024</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">二月 2024</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a><span class="archive-list-count">11</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/07/">七月 2024</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">二月 2024</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a><span class="archive-list-count">11</span></li></ul>
     </div>
   </div>
 
@@ -209,6 +209,51 @@
     <div class="widget-body">
       <ul class="recent-post-list list-unstyled no-thumbnail">
         
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/ARM%E5%B5%8C%E5%85%A5%E5%BC%8F/">ARM嵌入式</a>
+              </p>
+              <p class="item-title">
+                <a href="/2024/07/16/%E9%87%8E%E7%81%ABH7PRO+RGB565%E5%B1%8F%E5%B9%95+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL/" class="title">野火H7PRO+RGB565屏幕+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-07-16T15:27:23.000Z" itemprop="datePublished">2024-07-16</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/ARM%E5%B5%8C%E5%85%A5%E5%BC%8F/">ARM嵌入式</a>
+              </p>
+              <p class="item-title">
+                <a href="/2024/07/16/MDK%E4%BD%BF%E7%94%A8ARMV6%E7%BC%96%E8%AF%91%E5%99%A8/" class="title">MDK使用ARMV6编译器</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-07-16T12:27:23.000Z" itemprop="datePublished">2024-07-16</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%9D%82%E9%A1%B9/">杂项</a>
+              </p>
+              <p class="item-title">
+                <a href="/2024/07/16/typero%E8%BF%9E%E6%8E%A5%E9%98%BF%E9%87%8C%E4%BA%91oss/" class="title">Typero连接阿里云oss</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-07-16T12:27:23.000Z" itemprop="datePublished">2024-07-16</time>
+              </p>
+            </div>
+          </li>
+          
           <li>
             
             <div class="item-inner">
@@ -235,51 +280,6 @@
               </p>
               <p class="item-date">
                 <time datetime="2024-07-07T13:26:37.000Z" itemprop="datePublished">2024-07-07</time>
-              </p>
-            </div>
-          </li>
-          
-          <li>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                <a class="category-link" href="/categories/ARM%E5%B5%8C%E5%85%A5%E5%BC%8F/">ARM嵌入式</a>
-              </p>
-              <p class="item-title">
-                <a href="/2024/07/06/cubeMX%E4%BD%BF%E7%94%A8LwIP/" class="title">cubeMX使用LwIP</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2024-07-06T15:27:23.000Z" itemprop="datePublished">2024-07-06</time>
-              </p>
-            </div>
-          </li>
-          
-          <li>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                <a class="category-link" href="/categories/ARM%E5%B5%8C%E5%85%A5%E5%BC%8F/">ARM嵌入式</a>
-              </p>
-              <p class="item-title">
-                <a href="/2024/07/06/%E9%87%8E%E7%81%ABH7PRO+RGB565%E5%B1%8F%E5%B9%95+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL/" class="title">野火H7PRO+RGB565屏幕+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2024-07-06T15:27:23.000Z" itemprop="datePublished">2024-07-06</time>
-              </p>
-            </div>
-          </li>
-          
-          <li>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                <a class="category-link" href="/categories/%E7%AC%94%E8%AE%B0%E4%B8%8A%E4%BC%A0/">笔记上传</a>
-              </p>
-              <p class="item-title">
-                <a href="/2024/07/06/%E7%AC%94%E8%AE%B0%E4%B8%8A%E4%BC%A0%E6%AD%A5%E9%AA%A4/" class="title">笔记上传步骤</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2024-07-06T14:58:34.000Z" itemprop="datePublished">2024-07-06</time>
               </p>
             </div>
           </li>
@@ -312,8 +312,8 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2024/07/06/%E9%87%8E%E7%81%ABH7PRO+RGB565%E5%B1%8F%E5%B9%95+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL/" class="article-date">
-	  <time datetime="2024-07-06T15:27:23.000Z" itemprop="datePublished">2024-07-06</time>
+	<a href="/2024/07/16/%E9%87%8E%E7%81%ABH7PRO+RGB565%E5%B1%8F%E5%B9%95+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL/" class="article-date">
+	  <time datetime="2024-07-16T15:27:23.000Z" itemprop="datePublished">2024-07-16</time>
 	</a>
 </span>
         
@@ -326,7 +326,7 @@
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2024/07/06/%E9%87%8E%E7%81%ABH7PRO+RGB565%E5%B1%8F%E5%B9%95+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2024/07/16/%E9%87%8E%E7%81%ABH7PRO+RGB565%E5%B1%8F%E5%B9%95+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL/#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
@@ -594,7 +594,7 @@ SDRAM_HandleTypeDef hsdram1<span class="token punctuation">;</span>
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://actorjing.github.io/2024/07/06/%E9%87%8E%E7%81%ABH7PRO+RGB565%E5%B1%8F%E5%B9%95+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL/" title="野火H7PRO+RGB565屏幕+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL" target="_blank" rel="external">https://actorjing.github.io/2024/07/06/野火H7PRO+RGB565屏幕+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL/</a>
+      <a href="https://actorjing.github.io/2024/07/16/%E9%87%8E%E7%81%ABH7PRO+RGB565%E5%B1%8F%E5%B9%95+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL/" title="野火H7PRO+RGB565屏幕+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL" target="_blank" rel="external">https://actorjing.github.io/2024/07/16/野火H7PRO+RGB565屏幕+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -640,13 +640,9 @@ SDRAM_HandleTypeDef hsdram1<span class="token punctuation">;</span>
   
   <ul class="pager pull-left">
     
-    <li class="prev">
-      <a href="/2024/07/06/cubeMX%E4%BD%BF%E7%94%A8LwIP/" title="cubeMX使用LwIP"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
-    </li>
-    
     
     <li class="next">
-      <a href="/2024/07/06/%E7%AC%94%E8%AE%B0%E4%B8%8A%E4%BC%A0%E6%AD%A5%E9%AA%A4/" title="笔记上传步骤"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2024/07/16/MDK%E4%BD%BF%E7%94%A8ARMV6%E7%BC%96%E8%AF%91%E5%99%A8/" title="MDK使用ARMV6编译器"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
