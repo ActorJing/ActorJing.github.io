@@ -1,3 +1,4 @@
+https://actorjing.github.io/2024/07/06/%E9%87%8E%E7%81%ABH7PRO+RGB565%E5%B1%8F%E5%B9%95+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL/
 https://actorjing.github.io/2024/07/05/%E5%B7%A5%E4%BD%9C%E6%97%A5%E5%BF%97/
 https://actorjing.github.io/2024/07/07/%E5%82%A8%E8%83%BD%E4%B8%80%E6%AC%A1%E8%B0%83%E9%A2%91%E6%96%87%E7%8C%AE/
 https://actorjing.github.io/2024/07/07/%E5%82%A8%E8%83%BD%E4%B8%80%E6%AC%A1%E8%B0%83%E9%A2%91%E6%96%B9%E6%A1%88/

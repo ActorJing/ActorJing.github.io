@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>野火H7PRO+RGB565屏幕+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL | 我超爱大海的</title>
+  <meta name="description" content="野火H7PRO+RGB565屏幕+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL时钟配置，功率优化设置为0，设置主频480M，FMC240M，LTDC50M  野火开发板使用FMC的CKE1连接SDRAM使用bank2，地址为0xD0000000，cubemx配置如下：（注意GPIO，一开始使用bank1刷图正常，画点错误，发现是IO配置错误，理论上刷图也会报错）  配置LTDC：（">
+<meta property="og:type" content="article">
+<meta property="og:title" content="野火H7PRO+RGB565屏幕+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL">
+<meta property="og:url" content="https://actorjing.github.io/2024/07/06/%E9%87%8E%E7%81%ABH7PRO+RGB565%E5%B1%8F%E5%B9%95+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL/index.html">
+<meta property="og:site_name" content="我超爱大海的">
+<meta property="og:description" content="野火H7PRO+RGB565屏幕+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL时钟配置，功率优化设置为0，设置主频480M，FMC240M，LTDC50M  野火开发板使用FMC的CKE1连接SDRAM使用bank2，地址为0xD0000000，cubemx配置如下：（注意GPIO，一开始使用bank1刷图正常，画点错误，发现是IO配置错误，理论上刷图也会报错）  配置LTDC：（">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240715170751977.png">
+<meta property="og:image" content="https://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240715171626368.png">
+<meta property="og:image" content="https://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240715171841114.png">
+<meta property="og:image" content="https://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240715172018212.png">
+<meta property="og:image" content="https://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240715172054060.png">
+<meta property="og:image" content="https://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240716151004241.png">
+<meta property="og:image" content="https://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240716190006606.png">
+<meta property="og:image" content="https://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240715110918750.png">
+<meta property="og:image" content="https://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240715161349234.png">
+<meta property="og:image" content="https://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240716191727743.png">
+<meta property="og:image" content="https://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240716192339242.png">
+<meta property="article:published_time" content="2024-07-06T15:27:23.000Z">
+<meta property="article:modified_time" content="2024-07-16T12:29:33.024Z">
+<meta property="article:author" content="Jing Wu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240715170751977.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://actorjing.github.io/2024/07/06/%E9%87%8E%E7%81%ABH7PRO+RGB565%E5%B1%8F%E5%B9%95+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="我超爱大海的" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/title_logo.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/ActorJing" target="_blank">
+          <img class="img-circle img-rotate" src="/images/actor.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">我超爱大海的</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">long time no see</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Hefei, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/book">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ARM%E5%B5%8C%E5%85%A5%E5%BC%8F/">ARM嵌入式</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/FOC%E5%AD%A6%E4%B9%A0/">FOC学习</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0/">Linux嵌入式学习</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E4%BD%9C%E6%97%A5%E5%BF%97/">工作日志</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%91%84%E5%BD%B1%E6%97%A5%E8%AE%B0/">摄影日记</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AC%94%E8%AE%B0%E4%B8%8A%E4%BC%A0/">笔记上传</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BA%E6%96%87/">论文</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/07/">七月 2024</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">二月 2024</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a><span class="archive-list-count">11</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E8%AE%BA%E6%96%87/">论文</a>
+              </p>
+              <p class="item-title">
+                <a href="/2024/07/07/%E5%82%A8%E8%83%BD%E4%B8%80%E6%AC%A1%E8%B0%83%E9%A2%91%E6%96%B9%E6%A1%88/" class="title">储能一次调频方案</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-07-07T14:12:34.000Z" itemprop="datePublished">2024-07-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E8%AE%BA%E6%96%87/">论文</a>
+              </p>
+              <p class="item-title">
+                <a href="/2024/07/07/%E5%82%A8%E8%83%BD%E4%B8%80%E6%AC%A1%E8%B0%83%E9%A2%91%E6%96%87%E7%8C%AE/" class="title">储能一次调频文献</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-07-07T13:26:37.000Z" itemprop="datePublished">2024-07-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/ARM%E5%B5%8C%E5%85%A5%E5%BC%8F/">ARM嵌入式</a>
+              </p>
+              <p class="item-title">
+                <a href="/2024/07/06/cubeMX%E4%BD%BF%E7%94%A8LwIP/" class="title">cubeMX使用LwIP</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-07-06T15:27:23.000Z" itemprop="datePublished">2024-07-06</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/ARM%E5%B5%8C%E5%85%A5%E5%BC%8F/">ARM嵌入式</a>
+              </p>
+              <p class="item-title">
+                <a href="/2024/07/06/%E9%87%8E%E7%81%ABH7PRO+RGB565%E5%B1%8F%E5%B9%95+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL/" class="title">野火H7PRO+RGB565屏幕+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-07-06T15:27:23.000Z" itemprop="datePublished">2024-07-06</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E7%AC%94%E8%AE%B0%E4%B8%8A%E4%BC%A0/">笔记上传</a>
+              </p>
+              <p class="item-title">
+                <a href="/2024/07/06/%E7%AC%94%E8%AE%B0%E4%B8%8A%E4%BC%A0%E6%AD%A5%E9%AA%A4/" class="title">笔记上传步骤</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-07-06T14:58:34.000Z" itemprop="datePublished">2024-07-06</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-野火H7PRO+RGB565屏幕+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      野火H7PRO+RGB565屏幕+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2024/07/06/%E9%87%8E%E7%81%ABH7PRO+RGB565%E5%B1%8F%E5%B9%95+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL/" class="article-date">
+	  <time datetime="2024-07-06T15:27:23.000Z" itemprop="datePublished">2024-07-06</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/ARM%E5%B5%8C%E5%85%A5%E5%BC%8F/">ARM嵌入式</a>
+  </span>
+
+        
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2024/07/06/%E9%87%8E%E7%81%ABH7PRO+RGB565%E5%B1%8F%E5%B9%95+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="野火H7PRO-RGB565屏幕-LTDC-SDRAM-DMA2D-FreeRTOS-LVGL"><a href="#野火H7PRO-RGB565屏幕-LTDC-SDRAM-DMA2D-FreeRTOS-LVGL" class="headerlink" title="野火H7PRO+RGB565屏幕+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL"></a>野火H7PRO+RGB565屏幕+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL</h3><p>时钟配置，功率优化设置为0，设置主频480M，FMC240M，LTDC50M</p>
+<p><img src="https://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240715170751977.png" alt="image-20240715170751977"></p>
+<p>野火开发板使用FMC的CKE1连接SDRAM使用bank2，地址为0xD0000000，cubemx配置如下：（注意GPIO，一开始使用bank1刷图正常，画点错误，发现是IO配置错误，理论上刷图也会报错）</p>
+<p><img src="https://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240715171626368.png" alt="image-20240715171626368"></p>
+<p>配置LTDC：（需要注意引脚IO，参数对应数据手册，LTDC有背景层，图层1和图层2，本工程只使用图层1）</p>
+<p><img src="https://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240715171841114.png" alt="image-20240715171841114"></p>
+<p>数据手册如下：</p>
+<p><img src="https://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240715172018212.png" alt="image-20240715172018212"></p>
+<p>cubemx配置DMA2D：</p>
+<p><img src="https://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240715172054060.png" alt="image-20240715172054060"></p>
+<p>生成工程后，先初始化FMC，再配置SDRAM自动刷新命令，最后初始化LTDC：</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">static</span> FMC_SDRAM_CommandTypeDef Command<span class="token punctuation">;</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> FMC_COMMAND_TARGET_BANK   FMC_SDRAM_CMD_TARGET_BANK2</span>
+
+SDRAM_HandleTypeDef hsdram1<span class="token punctuation">;</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> SDRAM_TIMEOUT                    ((uint32_t)0xFFFF)</span>
+<span class="token comment" spellcheck="true">/**
+  * @brief  延迟一段时间
+  * @param  延迟的时间长度
+  * @retval None
+  */</span>
+<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">SDRAM_delay</span><span class="token punctuation">(</span>__IO uint32_t nCount<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  __IO uint32_t index <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> 
+  <span class="token keyword">for</span><span class="token punctuation">(</span>index <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">100000</span> <span class="token operator">*</span> nCount<span class="token punctuation">)</span><span class="token punctuation">;</span> index <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">;</span> index<span class="token operator">--</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">/**
+  * @brief  对SDRAM芯片进行初始化配置
+  * @param  None. 
+  * @retval None.
+  */</span>
+<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">SDRAM_InitSequence</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    uint32_t tmpr <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* Step 1 ----------------------------------------------------------------*/</span>
+    <span class="token comment" spellcheck="true">/* 配置命令：开启提供给SDRAM的时钟 */</span>
+    Command<span class="token punctuation">.</span>CommandMode <span class="token operator">=</span> FMC_SDRAM_CMD_CLK_ENABLE<span class="token punctuation">;</span>
+    Command<span class="token punctuation">.</span>CommandTarget <span class="token operator">=</span> FMC_COMMAND_TARGET_BANK<span class="token punctuation">;</span>
+    Command<span class="token punctuation">.</span>AutoRefreshNumber <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    Command<span class="token punctuation">.</span>ModeRegisterDefinition <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/* 发送配置命令 */</span>
+    <span class="token function">HAL_SDRAM_SendCommand</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>sdramHandle<span class="token punctuation">,</span> <span class="token operator">&amp;</span>Command<span class="token punctuation">,</span> SDRAM_TIMEOUT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* Step 2: 延时100us */</span> 
+    <span class="token function">SDRAM_delay</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* Step 3 ----------------------------------------------------------------*/</span>
+    <span class="token comment" spellcheck="true">/* 配置命令：对所有的bank预充电 */</span> 
+    Command<span class="token punctuation">.</span>CommandMode <span class="token operator">=</span> FMC_SDRAM_CMD_PALL<span class="token punctuation">;</span>
+    Command<span class="token punctuation">.</span>CommandTarget <span class="token operator">=</span> FMC_COMMAND_TARGET_BANK<span class="token punctuation">;</span>
+    Command<span class="token punctuation">.</span>AutoRefreshNumber <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    Command<span class="token punctuation">.</span>ModeRegisterDefinition <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/* 发送配置命令 */</span>
+    <span class="token function">HAL_SDRAM_SendCommand</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>sdramHandle<span class="token punctuation">,</span> <span class="token operator">&amp;</span>Command<span class="token punctuation">,</span> SDRAM_TIMEOUT<span class="token punctuation">)</span><span class="token punctuation">;</span>   
+
+    <span class="token comment" spellcheck="true">/* Step 4 ----------------------------------------------------------------*/</span>
+    <span class="token comment" spellcheck="true">/* 配置命令：自动刷新 */</span>   
+    Command<span class="token punctuation">.</span>CommandMode <span class="token operator">=</span> FMC_SDRAM_CMD_AUTOREFRESH_MODE<span class="token punctuation">;</span>
+    Command<span class="token punctuation">.</span>CommandTarget <span class="token operator">=</span> FMC_COMMAND_TARGET_BANK<span class="token punctuation">;</span>
+    Command<span class="token punctuation">.</span>AutoRefreshNumber <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">;</span>
+    Command<span class="token punctuation">.</span>ModeRegisterDefinition <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/* 发送配置命令 */</span>
+    <span class="token function">HAL_SDRAM_SendCommand</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>sdramHandle<span class="token punctuation">,</span> <span class="token operator">&amp;</span>Command<span class="token punctuation">,</span> SDRAM_TIMEOUT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* Step 5 ----------------------------------------------------------------*/</span>
+    <span class="token comment" spellcheck="true">/* 设置sdram寄存器配置 */</span>
+    tmpr <span class="token operator">=</span> <span class="token punctuation">(</span>uint32_t<span class="token punctuation">)</span>SDRAM_MODEREG_BURST_LENGTH_1          <span class="token operator">|</span>
+                   SDRAM_MODEREG_BURST_TYPE_SEQUENTIAL   <span class="token operator">|</span>
+                   SDRAM_MODEREG_CAS_LATENCY_3           <span class="token operator">|</span>
+                   SDRAM_MODEREG_OPERATING_MODE_STANDARD <span class="token operator">|</span>
+                   SDRAM_MODEREG_WRITEBURST_MODE_SINGLE<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* 配置命令：设置SDRAM寄存器 */</span>
+    Command<span class="token punctuation">.</span>CommandMode <span class="token operator">=</span> FMC_SDRAM_CMD_LOAD_MODE<span class="token punctuation">;</span>
+    Command<span class="token punctuation">.</span>CommandTarget <span class="token operator">=</span> FMC_COMMAND_TARGET_BANK<span class="token punctuation">;</span>
+    Command<span class="token punctuation">.</span>AutoRefreshNumber <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    Command<span class="token punctuation">.</span>ModeRegisterDefinition <span class="token operator">=</span> tmpr<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/* 发送配置命令 */</span>
+    <span class="token function">HAL_SDRAM_SendCommand</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>sdramHandle<span class="token punctuation">,</span> <span class="token operator">&amp;</span>Command<span class="token punctuation">,</span> SDRAM_TIMEOUT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* Step 6 ----------------------------------------------------------------*/</span>
+
+    <span class="token comment" spellcheck="true">/* 设置刷新计数器 */</span>
+    <span class="token comment" spellcheck="true">/* 刷新周期=64ms/8192行=7.8125us */</span>
+    <span class="token comment" spellcheck="true">/* COUNT=(7.8125us x Freq) - 20 */</span>
+    <span class="token comment" spellcheck="true">/* 设置自刷新速率 */</span>
+    <span class="token function">HAL_SDRAM_ProgramRefreshRate</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>sdramHandle<span class="token punctuation">,</span> <span class="token number">824</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="参考这篇博客"><a href="#参考这篇博客" class="headerlink" title="参考这篇博客"></a><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1851969">参考这篇博客</a></h3><p>LTDC测试时先测试背景层显示是否正常，再初始化SDRAM测试图层，注意显存地址，黑屏表示SDRAM初始化存在问题，白屏正常再测试画点，画点存在问题说明FMC块配置存在问题。</p>
+<p>DMA传输数据：</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">dma2d_transfer_data_r2m</span><span class="token punctuation">(</span>uint32_t <span class="token operator">*</span>addr<span class="token punctuation">,</span> uint32_t xSize<span class="token punctuation">,</span> uint32_t ySize<span class="token punctuation">,</span> uint32_t offsetLine<span class="token punctuation">,</span> uint16_t color<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    DMA2D<span class="token operator">-></span>CR <span class="token operator">=</span> DMA2D_R2M<span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">// dma2d mode: register to memory.</span>
+    DMA2D<span class="token operator">-></span>OPFCCR <span class="token operator">=</span> DMA2D_OUTPUT_RGB565<span class="token punctuation">;</span>
+
+    DMA2D<span class="token operator">-></span>OCOLR <span class="token operator">=</span> color<span class="token punctuation">;</span>
+    DMA2D<span class="token operator">-></span>OMAR <span class="token operator">=</span> <span class="token punctuation">(</span>uint32_t<span class="token punctuation">)</span>addr<span class="token punctuation">;</span>
+    DMA2D<span class="token operator">-></span>OOR <span class="token operator">=</span> offsetLine<span class="token punctuation">;</span>
+    DMA2D<span class="token operator">-></span>NLR <span class="token operator">=</span> <span class="token punctuation">(</span>uint32_t<span class="token punctuation">)</span><span class="token punctuation">(</span>xSize <span class="token operator">&lt;&lt;</span> <span class="token number">16</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token punctuation">(</span>uint16_t<span class="token punctuation">)</span>ySize<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//    DMA2D->NLR = (uint32_t)(xSize * ySize);</span>
+    
+    DMA2D<span class="token operator">-></span>CR <span class="token operator">|</span><span class="token operator">=</span> DMA2D_CR_START<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>DMA2D<span class="token operator">-></span>CR <span class="token operator">&amp;</span> DMA2D_CR_START<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">lcd_clear</span><span class="token punctuation">(</span>uint16_t color<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">dma2d_transfer_data_r2m</span><span class="token punctuation">(</span><span class="token punctuation">(</span>uint32_t <span class="token operator">*</span><span class="token punctuation">)</span>LCD_FRAME_BUFFER<span class="token punctuation">,</span> LCD_WIDTH<span class="token punctuation">,</span> LCD_HEIGHT<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> color<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//    uint16_t *ptr = (uint16_t*)LCD_FRAME_BUFFER;</span>
+<span class="token comment" spellcheck="true">//    uint32_t i = 0;</span>
+
+<span class="token comment" spellcheck="true">//    while (i++ &lt; LCD_WIDTH*LCD_HEIGHT) {</span>
+<span class="token comment" spellcheck="true">//        *(ptr+i) = color;</span>
+<span class="token comment" spellcheck="true">//    }</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">lcd_draw_point</span><span class="token punctuation">(</span>uint16_t x<span class="token punctuation">,</span> uint16_t y<span class="token punctuation">,</span> uint16_t color<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    uint32_t pos<span class="token punctuation">;</span>
+    uint16_t <span class="token operator">*</span>ptr<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// check position.</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>x <span class="token operator">></span> LCD_WIDTH <span class="token operator">||</span> y <span class="token operator">></span> LCD_HEIGHT<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">// calculate the position offset in framebuffer.</span>
+    pos <span class="token operator">=</span> x <span class="token operator">+</span> y<span class="token operator">*</span>LCD_WIDTH<span class="token punctuation">;</span>
+    ptr <span class="token operator">=</span> <span class="token punctuation">(</span>uint16_t<span class="token operator">*</span><span class="token punctuation">)</span>LCD_FRAME_BUFFER<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// modify the framebuffer.</span>
+
+    <span class="token function">dma2d_transfer_data_r2m</span><span class="token punctuation">(</span><span class="token punctuation">(</span>uint32_t <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>ptr<span class="token operator">+</span>pos<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> color<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span>
+</code></pre>
+<p>LVGL移植：使用lvgl8.3.10，适配GUI GUIDER版本</p>
+<p>在keil工程中新建lvgl组，将src目录下所有的c和h文件添加到该组中，注意是所有的c和h文件，包括子目录中的！</p>
+<p><img src="https://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240716151004241.png" alt="image-20240716151004241"></p>
+<p>在keil工程中新建lvgl_port组，将examples\porting中的disp和indev文件（显示屏和外设，文件系统未使用）和lvgl.h，lv_conf.h放在该组中：</p>
+<p><img src="https://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240716190006606.png" alt="image-20240716190006606"></p>
+<p>编译可能会出现的问题和解决方法（stderr断言缺失）：</p>
+<p><img src="https://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240715110918750.png" alt="image-20240715110918750"></p>
+<p>LVGL运行需要1ms心跳，FreeRTOS的频率为1000Hz正好为1ms，lvgl中有FreeRTOS钩子函数，需要在配置文件中打开，注意这里不要使用cubemx勾选，否则会创建一个新的钩子函数，重新生成工程时需要再配置一下。</p>
+<p><img src="https://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240715161349234.png" alt="image-20240715161349234"></p>
+<p>lv_port_disp.c实现画点函数：</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">disp_flush</span><span class="token punctuation">(</span>lv_disp_drv_t <span class="token operator">*</span> disp_drv<span class="token punctuation">,</span> <span class="token keyword">const</span> lv_area_t <span class="token operator">*</span> area<span class="token punctuation">,</span> lv_color_t <span class="token operator">*</span> color_p<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>disp_flush_enabled<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+ <span class="token comment" spellcheck="true">/*The most simple case (but also the slowest) to put all pixels to the screen one-by-one*/</span>
+
+        int32_t x<span class="token punctuation">;</span>
+        int32_t y<span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span>y <span class="token operator">=</span> area<span class="token operator">-></span>y1<span class="token punctuation">;</span> y <span class="token operator">&lt;=</span> area<span class="token operator">-></span>y2<span class="token punctuation">;</span> y<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">for</span><span class="token punctuation">(</span>x <span class="token operator">=</span> area<span class="token operator">-></span>x1<span class="token punctuation">;</span> x <span class="token operator">&lt;=</span> area<span class="token operator">-></span>x2<span class="token punctuation">;</span> x<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token comment" spellcheck="true">/*Put a pixel to the display. For example:*/</span>
+                <span class="token function">lcd_draw_point</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span> color_p<span class="token operator">-></span>full<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                color_p<span class="token operator">++</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/*IMPORTANT!!!
+     *Inform the graphics library that you are ready with the flushing*/</span>
+    <span class="token function">lv_disp_flush_ready</span><span class="token punctuation">(</span>disp_drv<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>lv_port_indev.c实现触摸屏坐标读取，这里遇到一个坑，GT9157的寄存器地址和GT911一模一样，程序使用GT911：</p>
+<pre class=" language-c"><code class="language-c">
+<span class="token comment" spellcheck="true">/*Will be called by the library to read the touchpad*/</span>
+<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">touchpad_read</span><span class="token punctuation">(</span>lv_indev_drv_t <span class="token operator">*</span> indev_drv<span class="token punctuation">,</span> lv_indev_data_t <span class="token operator">*</span> data<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">static</span> lv_coord_t last_x <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">static</span> lv_coord_t last_y <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/*Save the pressed coordinates and the state*/</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">touchpad_is_pressed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token function">touchpad_get_xy</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>last_x<span class="token punctuation">,</span> <span class="token operator">&amp;</span>last_y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        data<span class="token operator">-></span>state <span class="token operator">=</span> LV_INDEV_STATE_PR<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        data<span class="token operator">-></span>state <span class="token operator">=</span> LV_INDEV_STATE_REL<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/*Set the last pressed coordinates*/</span>
+    data<span class="token operator">-></span>point<span class="token punctuation">.</span>x <span class="token operator">=</span> last_x<span class="token punctuation">;</span>
+    data<span class="token operator">-></span>point<span class="token punctuation">.</span>y <span class="token operator">=</span> last_y<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">/*Return true is the touchpad is pressed*/</span>
+<span class="token keyword">static</span> bool <span class="token function">touchpad_is_pressed</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    uint8_t temp <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/*Your code comes here*/</span>
+    <span class="token function">GT911_ReadReg</span><span class="token punctuation">(</span>GT_GSTID_REG<span class="token punctuation">,</span> <span class="token operator">&amp;</span>temp<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>temp <span class="token operator">&amp;</span> <span class="token number">0x80</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>temp <span class="token operator">&amp;</span> <span class="token number">0x0F</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">return</span> true<span class="token punctuation">;</span>            
+        <span class="token punctuation">}</span>
+        temp <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token function">GT911_WriteReg</span><span class="token punctuation">(</span>GT_GSTID_REG<span class="token punctuation">,</span> <span class="token operator">&amp;</span>temp<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">// ESP_LOGI(TAG, "temp=0x%X",temp);</span>
+ 
+    <span class="token keyword">return</span> false<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">/*Get the x and y coordinates if the touchpad is pressed*/</span>
+<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">touchpad_get_xy</span><span class="token punctuation">(</span>lv_coord_t <span class="token operator">*</span> x<span class="token punctuation">,</span> lv_coord_t <span class="token operator">*</span> y<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">/*Your code comes here*/</span>
+    uint8_t data<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    u8 Data_length<span class="token punctuation">;</span>
+    u8 Read_buff<span class="token punctuation">[</span><span class="token number">20</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    
+    <span class="token function">GT911_ReadReg</span><span class="token punctuation">(</span>GT_TP1_REG<span class="token punctuation">,</span> data<span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">*</span>x <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>data<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">&amp;</span> <span class="token number">0x0f</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token number">8</span><span class="token punctuation">)</span> <span class="token operator">+</span> data<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token operator">*</span>y <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">(</span>data<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">&amp;</span> <span class="token number">0x0f</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token number">8</span><span class="token punctuation">)</span> <span class="token operator">+</span> data<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    data<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token function">GT911_WriteReg</span><span class="token punctuation">(</span>GT_GSTID_REG<span class="token punctuation">,</span> data<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span>
+</code></pre>
+<p>最后打开显示和外设文件的开关，编译。</p>
+<p><img src="https://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240716191727743.png" alt="image-20240716191727743"></p>
+<p>如果存在#include “lvgl&#x2F;lvgl.h”报错，修改为#include “lvgl.h”</p>
+<p>GUI GUIDER的移植只需要拷贝custom和generated文件夹，添加所有文件，头文件修改为#include “lvgl.h”，如果使用了其他图形插件，需要手动添加</p>
+<p><img src="https://wochaoaidahaide.oss-cn-beijing.aliyuncs.com/img/image-20240716192339242.png" alt="image-20240716192339242"></p>
+<p>GUI GUIDER运行，先初始化lvgl，显示屏，外设，再初始化GUI，循环调用lv_timer_handler()处理函数：</p>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/* USER CODE END Header_StartDefaultTask */</span>
+<span class="token keyword">void</span> <span class="token function">StartDefaultTask</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>argument<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">/* USER CODE BEGIN StartDefaultTask */</span>
+    <span class="token function">lv_init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">lv_port_disp_init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">lv_port_indev_init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token function">setup_ui</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>guider_ui<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">events_init</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>guider_ui<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">/* Infinite loop */</span>
+  <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token punctuation">;</span><span class="token punctuation">;</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token function">lv_timer_handler</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">osDelay</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment" spellcheck="true">/* USER CODE END StartDefaultTask */</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="工程源码地址"><a href="#工程源码地址" class="headerlink" title="工程源码地址"></a><a target="_blank" rel="noopener" href="https://github.com/ActorJing/STM32-LTDC-SDRAM-LVGL-RTOS">工程源码地址</a></h3><p>本工程生成时使用ARM V6编译器，官方cubemx生成直接使用v6编译器会报错，需要修改PACK包中的RTOS文件</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://actorjing.github.io/2024/07/06/%E9%87%8E%E7%81%ABH7PRO+RGB565%E5%B1%8F%E5%B9%95+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL/" title="野火H7PRO+RGB565屏幕+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL" target="_blank" rel="external">https://actorjing.github.io/2024/07/06/野火H7PRO+RGB565屏幕+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/ActorJing" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/actor.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/ActorJing" target="_blank"><span class="text-dark">我超爱大海的</span><small class="ml-1x">long time no see</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2024/07/06/cubeMX%E4%BD%BF%E7%94%A8LwIP/" title="cubeMX使用LwIP"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2024/07/06/%E7%AC%94%E8%AE%B0%E4%B8%8A%E4%BC%A0%E6%AD%A5%E9%AA%A4/" title="笔记上传步骤"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <!-- <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer> -->
+
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: 'tYxMN2OZzN0cW9hwBDlP5EEV-gzGzoHsz',
+    appKey: '2KwEcCdsaVhXls99AiMISWuZ',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+<script src="false"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

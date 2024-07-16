@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://actorjing.github.io/2024/07/06/%E9%87%8E%E7%81%ABH7PRO+RGB565%E5%B1%8F%E5%B9%95+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL/</loc>
+    
+    <lastmod>2024-07-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://actorjing.github.io/2024/07/05/%E5%B7%A5%E4%BD%9C%E6%97%A5%E5%BF%97/</loc>
     
     <lastmod>2024-07-10</lastmod>
@@ -220,7 +229,7 @@
 
   <url>
     <loc>https://actorjing.github.io/</loc>
-    <lastmod>2024-07-10</lastmod>
+    <lastmod>2024-07-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -230,56 +239,56 @@
   
   <url>
     <loc>https://actorjing.github.io/categories/%E6%91%84%E5%BD%B1%E6%97%A5%E8%AE%B0/</loc>
-    <lastmod>2024-07-10</lastmod>
+    <lastmod>2024-07-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://actorjing.github.io/categories/FOC%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2024-07-10</lastmod>
+    <lastmod>2024-07-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://actorjing.github.io/categories/Linux%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2024-07-10</lastmod>
+    <lastmod>2024-07-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://actorjing.github.io/categories/%E5%B7%A5%E4%BD%9C%E6%97%A5%E5%BF%97/</loc>
-    <lastmod>2024-07-10</lastmod>
+    <lastmod>2024-07-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://actorjing.github.io/categories/%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2024-07-10</lastmod>
+    <lastmod>2024-07-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://actorjing.github.io/categories/%E7%AC%94%E8%AE%B0%E4%B8%8A%E4%BC%A0/</loc>
-    <lastmod>2024-07-10</lastmod>
+    <lastmod>2024-07-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://actorjing.github.io/categories/ARM%E5%B5%8C%E5%85%A5%E5%BC%8F/</loc>
-    <lastmod>2024-07-10</lastmod>
+    <lastmod>2024-07-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://actorjing.github.io/categories/%E8%AE%BA%E6%96%87/</loc>
-    <lastmod>2024-07-10</lastmod>
+    <lastmod>2024-07-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
