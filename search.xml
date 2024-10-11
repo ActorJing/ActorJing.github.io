@@ -4,6 +4,38 @@
   
     
     <entry>
+      <title>嵌入式八股文.md</title>
+      <link href="/2024/09/18/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%85%AB%E8%82%A1%E6%96%87/"/>
+      <url>/2024/09/18/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%85%AB%E8%82%A1%E6%96%87/</url>
+      
+        <content type="html"><![CDATA[<h3 id="SPI"><a href="#SPI" class="headerlink" title="SPI"></a>SPI</h3><p>串行，四线：CLK，MISO，MOSI，CS</p><p>允许一个主机多个从机</p><p>SPI有四种操作模式，对应时钟极性和时钟相位</p><p>CPOL表示CLK的空闲状态有效电平，0空闲低电平，1空闲高电平</p><p>CPHA数据采样时间，0表示第一个跳变沿，1表示第二个跳变沿</p><p>配置SPI传输速度分频值和系统时钟</p><h3 id="UART"><a href="#UART" class="headerlink" title="UART"></a>UART</h3><p>串行，TX，RX</p><h3 id="递归函数定义没有问题，递归深层次后易引发什么问题"><a href="#递归函数定义没有问题，递归深层次后易引发什么问题" class="headerlink" title="递归函数定义没有问题，递归深层次后易引发什么问题"></a>递归函数定义没有问题，递归深层次后易引发什么问题</h3><p>影响执行效率</p><p>栈溢出。</p><p>因为每一次调用函数是，栈区都要给函数分配空间，而且上一次调用并没有结束，调用的次数太多，栈区的内存不够分配了，便会出现栈溢出的情况。</p><h3 id="堆与栈的区别"><a href="#堆与栈的区别" class="headerlink" title="堆与栈的区别"></a>堆与栈的区别</h3><p>（1）栈的空间是系统自动分配和回收，堆的空间是用户手动分配回收（malloc，calloc，realloc，free）</p><p>（2）栈的空间较小，堆的空间较大</p><p>（3）栈的地址空间往地址向下增长，堆的地址空间是由低地址到高地址</p><p>（4）栈的存储效率更高</p><h3 id="PV操作"><a href="#PV操作" class="headerlink" title="PV操作"></a>PV操作</h3><p>申请资源 释放资源<br>一般用于同步和互斥</p><h3 id="什么是嵌入式系统"><a href="#什么是嵌入式系统" class="headerlink" title="什么是嵌入式系统"></a>什么是嵌入式系统</h3><p>完全嵌入受控器件内部、为特定应用而设计的专用计算机系统。与普通计算机不同，嵌入式系统一般拥有非常有限的硬件资源，一般运行固定的程序或固定的操作系统加可变的应用程序。</p><h3 id="volatile关键字的作用"><a href="#volatile关键字的作用" class="headerlink" title="volatile关键字的作用"></a>volatile关键字的作用</h3><p>（1）裸机编程时，某变量是指向寄存器中某一特定地址，添加volatile的变量不进行优化处理；</p><p>（2）某函数与中断函数共享全局变量时，加上volatile，让编译器不要省略该变量的访问；</p><p>（3）多线程中修饰共享全局变量，让编译器不要省略该变量的访问。</p><h2 id="FREERTOS操作系统"><a href="#FREERTOS操作系统" class="headerlink" title="FREERTOS操作系统"></a>FREERTOS操作系统</h2><p>完全免费且开源的嵌入式实时操作系统</p><ol><li>抢占式（pre-emptive）或合作式（co-operative）任务调度方式</li><li>优先级管理</li><li>任务通知机制</li><li>消息队列</li><li>信号量</li></ol><h3 id="启动流程："><a href="#启动流程：" class="headerlink" title="启动流程："></a>启动流程：</h3><p>RTOS系统初始化。比如RTOS里面的全局变量的初始化，空闲任务的创建等。创建各种任务。启动RTOS调度器</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>c++数据结构</title>
+      <link href="/2024/07/20/c-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+      <url>/2024/07/20/c-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</url>
+      
+        <content type="html"><![CDATA[<h1 id="c-数据结构"><a href="#c-数据结构" class="headerlink" title="c++数据结构"></a>c++数据结构</h1><h2 id="平衡二叉树"><a href="#平衡二叉树" class="headerlink" title="平衡二叉树"></a>平衡二叉树</h2>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>野火H7PRO+RGB565屏幕+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL</title>
       <link href="/2024/07/16/%E9%87%8E%E7%81%ABH7PRO+RGB565%E5%B1%8F%E5%B9%95+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL/"/>
       <url>/2024/07/16/%E9%87%8E%E7%81%ABH7PRO+RGB565%E5%B1%8F%E5%B9%95+LTDC+SDRAM+DMA2D+FreeRTOS+LVGL/</url>
